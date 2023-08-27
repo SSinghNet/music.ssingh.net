@@ -1,0 +1,21 @@
+nav.navbar.navbar-expand-md.border-body.sticky-top.nav-fill
+    a.navbar-brand(href="#") 
+        img.me-3.d-inline-block.align-top(src="/images/slogo.png")
+        |SSingh.Net Music 
+    //- div.vr.me-3
+    button.navbar-toggler.navbar-dark(type="button" data-bs-toggle="collapse" data-bs-target="#main-navigation")
+        span.navbar-toggler-icon
+    div.collapse.navbar-collapse.navbar-right.justify-content-center#main-navigation
+        ul.navbar-nav.me-auto
+            li.nav-item
+                a.nav-link(href="#") charts
+            li.nav-item
+                a.nav-link(href="#") lists
+            li.nav-item
+                a.nav-link(href="/random") random
+        form.navbar-form.justify-content-right.col-lg-8(role="search")
+            div.input-group
+                input.form-control(type="search" placeholder="" aria-label="Search")
+                div.input-group-btn
+                    button.btn.btn-search(type="submit")
+                        i.bi-search

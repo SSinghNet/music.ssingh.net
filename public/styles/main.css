@@ -1,0 +1,186 @@
+/* table, th, td {
+    border: 1px solid;
+    margin: 5px;
+    padding: 3px;
+} */
+
+body {
+    font-family: "Cormorant";
+    background-color: #393C3F;
+    color: #E5E6E4;
+    margin: 0px;
+    letter-spacing: 0.02em;
+}
+
+.page-footer{
+    background-color: #222426;
+    padding: 20px 0;
+}
+
+.navbar{
+    background-color: #181A1C;
+    padding: 0.4em;
+}
+
+.navbar .navbar-brand img {
+    width: 35px;
+}
+
+.nav-link{
+    color: #E5E6E4;
+    text-align: right;
+    font-size: 1em ;
+}
+
+.nav-link:active, .nav-link:hover, .nav-link:focus{
+    color: #E5E6E4;
+}
+
+.nav-link:active, .nav-link:hover {
+    text-decoration-line: underline;
+    text-decoration-color: #F2545B;
+}
+
+.navbar-brand {
+    color: #F2545B;
+    /* font-weight: bold; */
+    font-size: 1.4em ;
+}
+
+.navbar-brand:hover, .navbar-brand:active, .navbar-brand:focus {
+    color: #F2545B;
+}
+
+.btn-search, .form-control{
+    font-family: "Cormorant";
+    background-color:#CFD2CD;
+    border-radius: 0;
+}
+
+.btn-search:hover, .btn-search:focus, .btn-search:active {
+    background-color:#CFD2CD;
+}
+
+.btn-search {
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+
+.form-control{
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;  
+    font-size: 1em ;
+}
+ 
+.form-control:hover, .form-control::selection, .form-control:active, .form-control:focus{
+    background-color:#CFD2CD;
+    border: 0px solid black;
+}
+
+.album-image{
+    width: 25em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width:inherit;
+}
+
+.album-image-small{
+    width: 4em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.artist-image{
+    width: 25em;
+    height: 25em;
+    object-fit: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.artist-image-small{
+    width: 3em;
+    height: 3em;
+    object-fit: cover;
+    border-radius: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#main-container {
+    background-color: #E5E6E4;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 50px;
+    margin-top: 2em;
+    margin-bottom: 6em;
+    color: #393C3F;
+}
+
+.badge-tag a {
+    text-decoration: none;
+    color: #E5E6E4;
+    font-family: "Cormorant";
+    font-size:1.2em;
+}
+
+.badge-tag{
+    background-color: #393C3F;
+    margin: .3em;
+    padding: .75em;
+}
+
+.badge-artist a {
+    text-decoration: none;
+    color: #393C3F;
+    font-family: "Cormorant";
+    font-size:1.3em;
+}
+
+.badge-artist{
+    /* background-color: #393C3F; */
+    margin: .3em;
+    padding: .75em;
+}
+
+.badge-album a {
+    text-decoration: none;
+    color: #E5E6E4;
+    font-family: "Cormorant";
+    font-size:1.5em;
+}
+
+.badge-album {
+    margin: .3em;
+    padding: .75em;
+    background-color:#393C3F ;
+}
+
+.badge-album .album-year {
+    font-size:.7em;
+    font-weight: 100;
+}
+
+.badge-album .album-artist {
+    font-size:.9em;
+    font-weight: 100;
+}
+
+.album-score {
+    /* border: 1px solid black; */
+    /* aspect-ratio: 1 / 1; */
+    height: 7.5em;
+    line-height: 7.5em;
+    border-radius: 100%;
+    font-size: 2em;
+} 
+
+.album-score span {
+    border: 1px solid black;
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    padding:1em;
+    padding-top: 1.45em;
+    padding-bottom: 1.45em;
+}
+
+.album-score-small {
+    font-size: 1em;
+    padding: 1.2em;
+}

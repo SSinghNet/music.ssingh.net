@@ -1,0 +1,26 @@
+extends default 
+
+block main
+    div.row.align-items-start
+        div.col-lg-6.col-12.align-self-center
+            br
+            br
+            img.artist-image(src=`${artist.image}`)
+            br
+            br
+            h2 #{artist.name}
+        div.col-lg-6.col-12.align-self-center
+            br
+            br
+            each album in artist.albums
+                span.badge.badge-album
+                    a(href=`/album/${album.id}`) 
+                        table
+                            tr
+                                td(rowspan=2)
+                                    img.album-image-small.me-3(src=`${album.image}`)
+                                td #{album.name}
+                                td(rowspan=2).album-score-small #{album.score}%
+                            tr
+                                td.album-year #{album.releaseDate.substr(0,4)}
+                br

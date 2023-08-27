@@ -1,0 +1,37 @@
+extends default 
+
+block main
+    div.row.align-items-start
+        div.col-lg-6.col-12.align-self-center
+            br
+            br
+            img.album-image(src=`${album.image}`)
+
+        div.col-lg-4.col-12.align-self-center
+            br
+            br
+            h1 #{album.name}
+            each artist in album.artists
+                span.badge.badge-artist
+                    a(href=`/artist/${artist.id}`)
+                        img.artist-image-small.me-2(src=`${artist.image}`)
+                        | #{artist.name}
+            br
+            br
+            h5 #{album.releaseDate}
+            br
+            br
+            each tag in album.tags
+                span.badge.badge-tag
+                    a(href=`/tag/${tag.id}`) #{tag.name}
+            br
+        div.col-lg-2.col-12.align-self-center
+            br
+            br
+            div.album-score 
+                span #{album.score}%
+            br
+    br 
+    br
+    hr(width="100%")
+    p #{album.review}

@@ -1,0 +1,66 @@
+extends default
+
+block main 
+    table
+        tr 
+            th(colspan=8) albums
+        tr 
+            th id 
+            th name 
+            th image
+            th releaseDate
+            th review
+            th score
+            th artists
+            th tags
+        each album in albums
+            tr
+                td #{album.id}
+                td 
+                    a(href=`/album/${album.id}`) #{album.name}
+                td #{album.image}
+                td #{album.releaseDate}
+                td #{album.review}
+                td #{album.score}
+                td 
+                    each artist in album.artists 
+                        #{artist.id}
+                td 
+                    each tag in album.tags 
+                        #{tag.id}
+    
+
+    table
+        tr 
+            th(colspan=4) artists
+        tr 
+            th id 
+            th name 
+            th image
+            th albums
+        each artist in artists 
+            tr
+                td #{artist.id}
+                td 
+                    a(href=`/artist/${artist.id}`) #{artist.name}
+                td #{artist.image}
+                td 
+                    each album in artist.albums 
+                        #{album.id}
+
+
+    table
+        tr 
+            th(colspan=3) tags
+        tr 
+            th id 
+            th name 
+            th albums
+        each tag in tags 
+            tr
+                td #{tag.id}
+                td 
+                    a(href=`/tag/${tag.id}`) #{tag.name}
+                td 
+                    each album in tag.albums 
+                        #{album.id}
