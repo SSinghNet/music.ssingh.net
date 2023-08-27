@@ -3,19 +3,25 @@ import { DataTypes } from "sequelize";
 import "dotenv/config"
 
 // export const sequelize = new Sequelize("sqlite::memory:");
-export const sequelize = new Sequelize({
-    dialect: "sqlite",
-    storage: "database.sqlite"
-});
+const getDb = () => {
+    if (process.env.NODE_ENV == "production") {
+        return new Sequelize(
+            process.env.DB_NAME,
+            process.env.DB_USER,
+            process.env.DB_PASS, {
+            host: process.env.DB_HOST,
+            dialect: "mysql"
+        });
+    } else {
+        return new Sequelize({
+            dialect: "sqlite",
+            storage: "database.sqlite"
+        });
+    }
+};
 
-// export const sequelize = new Sequelize(
-//     process.env.DB_NAME,
-//     process.env.DB_USER,
-//     process.env.DB_PASS, {
-//         host: process.env.DB_HOST,
-//         dialect: "mysql"
-//     }
-// );
+export const sequelize = getDb();
+
 
 try {
     await sequelize.authenticate();
