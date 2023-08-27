@@ -81,6 +81,7 @@ body {
     width: 25em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width:inherit;
+    max-width: 70vw;
 }
 
 .album-image-small{
@@ -93,6 +94,8 @@ body {
     height: 25em;
     object-fit: cover;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    max-width: 70vw;
+    border-radius: 10%;
 }
 
 .artist-image-small{
