@@ -30,7 +30,7 @@ router.get("/:id", async (req, res) => {
     let albs = await Album.findAll({
         where: { "$Tags.id$": tag.id },
         include: [Artist, Tag],
-        order: [["releaseDate", "ASC"]]
+        // order: [["releaseDate", "ASC"]]
     }).catch(() => {
         return res.status(500).render("default");
     });
