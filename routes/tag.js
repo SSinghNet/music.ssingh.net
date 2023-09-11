@@ -8,9 +8,11 @@ router.get("/:id", async (req, res) => {
     let tag = await Tag.findOne({
         where: { id: req.params.id },
         include: [Album],
-        // order: [
-        //     [{ model: Album }, 'releaseDate', 'ASC'],
-        // ]
+        order: [
+            [{ model: Album }, 'releaseDate', 'ASC'],
+        ]
+    }).catch( () => {
+        return res.status(500).render("default");
     });
 
 
