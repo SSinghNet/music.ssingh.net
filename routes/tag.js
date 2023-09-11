@@ -28,8 +28,15 @@ router.get("/:id", async (req, res) => {
     }
 
     let albs = await Album.findAll({
-        where: { "$Tags.id$": tag.id },
-        include: [Artist, Tag],
+        // where: { "$Tags.id$": { [Op.ne]: tag.id } },
+        // include: [Artist, Tag],
+        include: {
+            model: Tag,
+            where: {
+                id: tag.id
+            },
+        },
+        include: [Artist],
         order: [["releaseDate", "ASC"]]
     }).catch((err) => {
         return res.status(500).render("404", {type: err});
