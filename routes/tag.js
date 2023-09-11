@@ -11,9 +11,10 @@ router.get("/:id", async (req, res) => {
         order: [
             [{ model: Album }, 'releaseDate', 'ASC'],
         ]
-    }).catch( () => {
-        return res.status(500).render("default");
     });
+    // .catch(() => {
+    //     return res.status(500).render("default");
+    // });
 
 
     if (tag == null) {
@@ -30,7 +31,9 @@ router.get("/:id", async (req, res) => {
         where: { "$Tags.id$": tag.id },
         include: [Artist, Tag],
         order: [["releaseDate", "ASC"]]
-    }); 
+    }).catch(() => {
+        return res.status(500).render("default");
+    });
     
     res.status(200).render("tag", {tag: tag, albums: await albs});
 });
