@@ -1,5 +1,6 @@
 import express from "express";
 import { Album, Artist, Tag } from "../models/models.js";
+import { restAuth } from "../middleware/restAuth.js";
 
 export let router = express.Router();
 
@@ -32,7 +33,7 @@ router.get("/:id", async (req, res) => {
     res.status(200).render("tag", {tag: tag, albums: await albs});
 });
 
-router.post("/", async (req, res) => {
+router.post("/", restAuth, async (req, res) => {
     let tag = Tag.build({
         name: req.body.name
     });
@@ -41,7 +42,7 @@ router.post("/", async (req, res) => {
     res.status(201).json(tag);
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", restAuth, async (req, res) => {
     let tag = await Tag.findOne({ where: { id: req.params.id }});
     if (tag == null) {
         res.status(404).render("404", {type: "Tag"});
@@ -54,7 +55,7 @@ router.put("/:id", async (req, res) => {
     res.status(200).json(tag);
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", restAuth, async (req, res) => {
     let tag = await Tag.findOne({ where: { id: req.params.id }});
 
     if (tag == null) {

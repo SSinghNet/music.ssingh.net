@@ -1,5 +1,6 @@
 import express from "express";
 import { Album, Artist, Tag } from "../models/models.js";
+import { restAuth } from "../middleware/restAuth.js";
 
 export let router = express.Router();
 
@@ -32,7 +33,7 @@ router.get("/:id", async (req, res) => {
  * @param review album review (optional)
  * @param tags array of album tags (optional) [id, name] (tagid = -1 when newTag)
  */
-router.post("/", async (req, res) => {
+router.post("/", restAuth, async (req, res) => {
     let alb = Album.build({ 
         name: req.body.name,
         image: req.body.image,
@@ -93,7 +94,7 @@ router.post("/", async (req, res) => {
  * @param review album review (optional)
  * @param tags array of album tags (optional) [id, name] (tagid = -1 when newTag)
  */
-router.put("/:id", async (req, res) => {
+router.put("/:id", restAuth, async (req, res) => {
     let alb = await Album.findOne({ where: { id: req.params.id }, include: [Artist, Tag] });
     if (alb == null) {
         res.status(404).render("404", {type: "Album"});
@@ -153,7 +154,7 @@ router.put("/:id", async (req, res) => {
     res.status(200).json(alb);
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", restAuth, async (req, res) => {
     let alb = await Album.findOne({ where: { id: req.params.id }, include: [Artist, Tag]});
 
     if (alb == null) {
