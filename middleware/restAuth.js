@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import "dotenv/config"
+import "dotenv/config";
 
 export const restAuth = (req, res, next) => {
     console.log("auth");
@@ -13,10 +13,6 @@ export const restAuth = (req, res, next) => {
         next();
     });
 
-    // if (!auth) {
-    //     return res.status(401).send(accessToken);
-    // }
-    // next();
 };
 
 export const getAccessToken = (user) => {

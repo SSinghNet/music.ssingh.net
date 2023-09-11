@@ -47,7 +47,7 @@ router.put("/:id", restAuth, async (req, res) => {
     }
 
     if (req.body.name != null) art.name = req.body.name;
-    if (req.body.image != null) art.name = req.body.image;
+    if (req.body.image != null) art.image = req.body.image;
 
     art.save();
     res.status(200).json(art);
