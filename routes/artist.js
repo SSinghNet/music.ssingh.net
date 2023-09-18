@@ -30,20 +30,23 @@ router.get("/:id", async (req, res) => {
             having: {
                 id: art.id
             },
+            include: [{ model: Album, include: [Artist] }],
         },
-        // subQuery: false,
-        include: [Artist],
+        subQuery: false,
+        // include: [Artist],
         order: [["releaseDate", "ASC"]]
     }).catch((err) => {
         return res.status(500).render("404", {type: err});
     });
 
-    console.log(albs);
+    // console.log(await albs[0]["dataValues"].artists[0]["dataValues"].albums);
+
+    let albs2 = albs[0]["dataValues"].artists[0]["dataValues"].albums;
 
     // let albs = await Album.findAll({ where: { "$Artists.id$": art.id }, include: [Artist] });
     // console.log(albs[0].artists)
     
-    res.status(200).render("artist", {artist: art, albums: await albs});
+    res.status(200).render("artist", {artist: art, albums: albs2});
 });
 
 router.post("/", restAuth, async (req, res) => {
