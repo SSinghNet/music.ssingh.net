@@ -5,21 +5,25 @@ export let router = express.Router();
 
 router.get("/", async (req, res) => {
     let albums;
+    let pageTitle = "Top Albums of ";
 
-    if (false) {
-        albums = await Album.findAll(
-            { where: sequelize.where(sequelize.fn("YEAR", sequelize.col("releaseDate")), req.query.year) }
-        );
-    } else {
+    if (req.query.year != null) {
         albums = await Album.findAll({
-            // order: [
-            //     ['score', 'INC'],
-            // ],
+            where: sequelize.where(sequelize.fn("YEAR", sequelize.col("releaseDate")), req.query.year),
             include: [Artist, Tag]
         });
+        pageTitle += req.query.year;
+    } else {
+        albums = await Album.findAll({
+            order: [
+                ['score', 'DESC'],
+            ],
+            include: [Artist, Tag]
+        });
+        pageTitle += "All-Time"; 
     }
 
     console.log(albums);
 
-    res.render("charts", {"title": "Charts - ", "albums": albums});
+    res.render("charts", {"title": "Charts - ", "albums": albums, "pageTitle": pageTitle});
 });
