@@ -6,7 +6,7 @@ export let router = express.Router();
 router.get("/", async (req, res) => {
     let albums;
 
-    if (req.query.year != null) {
+    if (false) {
         albums = await Album.findAll(
             { where: sequelize.where(sequelize.fn("YEAR", sequelize.col("releaseDate")), req.query.year) }
         );
