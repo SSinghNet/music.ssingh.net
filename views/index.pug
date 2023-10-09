@@ -1,0 +1,33 @@
+extends default 
+block main 
+    div.row
+        each alb in albums
+            div.col-lg-4.col-12#album-item-container
+                a(href=`/album/${alb.id}`)
+                    div.album-item
+                        img.album-image(src=`${alb.image}`) 
+                        br
+                        span.album-name #{alb.name}
+                        br
+                        br
+                        each artist in alb.artists
+                            //- span.badge.badge-artist
+                            a(href=`/artist/${artist.id}`)
+                                img.artist-image-small.me-2(src=`${artist.image}`)
+                                | #{artist.name}
+                            |&nbsp;&nbsp;&nbsp;
+                        br
+                        br
+                        span.album-release.text-right #{alb.releaseDate}
+                        br
+                        br
+                        br
+                        span.album-score-s #{alb.score}%
+                        br
+                        br
+                        br
+                br
+                br
+
+    
+

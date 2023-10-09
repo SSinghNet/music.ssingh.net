@@ -9,6 +9,7 @@ import * as tag from "./routes/tag.js";
 import * as databaseValues from "./routes/databaseValues.js";
 import * as search from "./routes/search.js";
 import * as random from "./routes/random.js";
+import * as charts from "./routes/charts.js";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
@@ -22,13 +23,14 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 })); 
 
-// app.use("/", index.router);
+app.use("/", index.router);
 app.use("/album", album.router);
 app.use("/artist", artist.router);
 app.use("/tag", tag.router);
 app.use("/db", databaseValues.router);
 app.use("/search", search.router);
 app.use("/random", random.router);
+app.use("/charts", charts.router);
 
 app.all("*", (req, res) => {
     res.status(404).render("404", {type: "Page"});

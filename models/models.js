@@ -22,7 +22,6 @@ const getDb = () => {
 
 export const sequelize = getDb();
 
-
 try {
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");

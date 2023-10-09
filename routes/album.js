@@ -21,7 +21,7 @@ router.get("/:id", async (req, res) => {
         return;
     }
     
-    res.status(200).render("album", {album: alb});
+    res.status(200).render("album", {title: `${alb.name} - ` , album: alb});
 });
 
 /**
