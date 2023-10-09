@@ -7,7 +7,16 @@ router.get("/", async (req, res) => {
     let albums;
 
     if (req.query.year != null) {
-        let albums = await Album.findAll({ where: sequelize.where(sequelize.fn("YEAR", sequelize.col("releaseDate")), req.query.year) });
+        albums = await Album.findAll(
+            { where: sequelize.where(sequelize.fn("YEAR", sequelize.col("releaseDate")), req.query.year) }
+        );
+    } else {
+        albums = await Album.findAll({
+            order: [
+                ['score', 'INC'],
+            ],
+            include: [Artist, Tag]
+        });
     }
 
     console.log(albums);
