@@ -12,9 +12,9 @@ router.get("/", async (req, res) => {
         );
     } else {
         albums = await Album.findAll({
-            order: [
-                ['score', 'INC'],
-            ],
+            // order: [
+            //     ['score', 'INC'],
+            // ],
             include: [Artist, Tag]
         });
     }
