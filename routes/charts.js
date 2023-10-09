@@ -10,6 +10,9 @@ router.get("/", async (req, res) => {
     if (req.query.year != null) {
         albums = await Album.findAll({
             where: sequelize.where(sequelize.fn("YEAR", sequelize.col("releaseDate")), req.query.year),
+            order: [
+                ['score', 'DESC'],
+            ],
             include: [Artist, Tag]
         });
         pageTitle += req.query.year;
