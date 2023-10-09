@@ -26,7 +26,5 @@ router.get("/", async (req, res) => {
         pageTitle += "All-Time"; 
     }
 
-    console.log(albums);
-
     res.render("charts", {"title": "Charts - ", "albums": albums, "pageTitle": pageTitle});
 });

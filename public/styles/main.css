@@ -110,6 +110,11 @@ body {
     color: #393C3F;
 }
 
+.title {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
 .badge-tag a {
     text-decoration: none;
     color: #E5E6E4;
@@ -220,6 +225,33 @@ body {
     width: 2em;
     height: 2em;
 }
+
+.album-item-long {
+    background-color: #222426;
+    color:#E5E6E4;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+.album-item-long .album-image {
+    width:13em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.album-item-long table {
+    width: 100%;    
+    text-align: center;
+    justify-content: center;
+}
+
+
+.album-item-long .album-name {
+    font-size: 1.7em;
+    font-weight: 600;
+}
+
 
 .album-name .album-release {
     align-items: right;
