@@ -187,23 +187,41 @@ body {
     padding: 1.2em;
 }
 
+.album-item-wrapper{
+    width: 100%;
+    height: 100%;
+}
+
 .album-item {
     background-color: #222426;
     color:#E5E6E4;
     border-radius: 3%;
     font-size: 1em;
+    /* font-size: 1vw; */
     border: 1px solid #222426;
     width: 100%;
     /* margin: 1em; */
     padding: 0.5em;
     aspect-ratio: 1/1;
     height:90%;
+    position:relative;
 }
 
 .album-item .album-image{
-    width: 50%;
+    /* width: 50%; */
+    height: 50%;
     margin: 1em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: absolute; top: -10%; 
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    
+}
+.album-image-spacer{
+    display:inline-block;
+    height: 55%;
 }
 
 .album-item .badge .badge-artist {
@@ -217,7 +235,7 @@ body {
 }
 
 .album-item .album-name {
-    font-size: 1.7em;
+    font-size: max(1.1em, 1.4vw);
     font-weight: 600;
 }
 
@@ -231,6 +249,10 @@ body {
     color:#E5E6E4;
     padding: 2em;
     border-radius: 10px;
+}
+
+.album-item-long-alt {
+    background-color: #222426e6;
 }
 
 .album-item-long .album-image {
@@ -259,11 +281,16 @@ body {
 
 .album-score-s {
     font-weight: 700;
-    border: 3px solid #F2545B;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    outline: 3px solid #F2545B;
     height: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 100%;
-    padding: 1em;
-    padding-top: 1.5em;
+    width: 1.25em;
+    height: 1.25em;
+    padding: 0.9em;
+    padding-top: 1.5em;     
     padding-bottom: 1.5em;
 }

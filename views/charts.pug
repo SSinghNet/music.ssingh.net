@@ -11,7 +11,10 @@ block main
                     -previousScore = alb.score
                     -count++
                 a(href=`/album/${alb.id}`)
-                    div.album-item-long 
+                    - var x = " "
+                    if count % 2 == 0
+                        - var x = "album-item-long-alt"
+                    div.album-item-long(class=x)
                         table 
                             tr 
                                 td(style="width:10%") 
