@@ -42,7 +42,8 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", restAuth, async (req, res) => {
     let tag = Tag.build({
-        name: req.body.name
+        name: req.body.name,
+        color: req.body.color
     });
 
     await tag.save();
@@ -57,6 +58,7 @@ router.put("/:id", restAuth, async (req, res) => {
     }
 
     if (req.body.name != null) tag.name = req.body.name;
+    if (req.body.color != null) tag.color = req.body.color;
 
     tag.save();
     res.status(200).json(tag);

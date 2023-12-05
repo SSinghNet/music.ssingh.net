@@ -22,7 +22,10 @@ block main
             br
             br
             each tag in album.tags
-                span.badge.badge-tag
+                - var theStyle = ""
+                if tag.color != null 
+                    - var theStyle = "background-color:#" + tag.color
+                span.badge.badge-tag(style=theStyle)
                     a(href=`/tag/${tag.id}`) #{tag.name}
             br
         div.col-lg-2.col-12.align-self-center

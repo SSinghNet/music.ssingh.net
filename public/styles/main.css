@@ -1,10 +1,12 @@
 body {
-    font-family: "Cormorant";
+    /* font-family: "Cormorant"; */
+    font-family: "Didact Gothic";
     background-color: #393C3F;
     color: #E5E6E4;
     margin: 0px;
     letter-spacing: 0.02em;
 }
+
 
 .page-footer{
     background-color: #222426;
@@ -46,7 +48,7 @@ body {
 }
 
 .btn-search, .form-control{
-    font-family: "Cormorant";
+    font-family: "Didact Gothic";
     background-color:#CFD2CD;
     border-radius: 0;
 }
@@ -111,14 +113,14 @@ body {
 }
 
 .title {
-    font-weight: 700;
+    font-weight: 900;
     text-decoration: underline;
 }
 
 .badge-tag a {
     text-decoration: none;
     color: #E5E6E4;
-    font-family: "Cormorant";
+    font-family: "Didact Gothic";
     font-size:1.2em;
 }
 
@@ -131,8 +133,9 @@ body {
 .badge-artist a {
     text-decoration: none;
     color: #393C3F;
-    font-family: "Cormorant";
+    font-family: "Didact Gothic";
     font-size:1.3em;
+    font-weight: 500;
 }
 
 .badge-artist{
@@ -144,7 +147,7 @@ body {
 .badge-album a {
     text-decoration: none;
     color: #E5E6E4;
-    font-family: "Cormorant";
+    font-family: "Didact Gothic";
     font-size:1.5em;
 }
 
@@ -290,7 +293,7 @@ body {
     border-radius: 100%;
     width: 1.25em;
     height: 1.25em;
-    padding: 0.9em;
+    padding: 1.1em;
     padding-top: 1.5em;     
     padding-bottom: 1.5em;
 }

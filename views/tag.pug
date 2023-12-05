@@ -5,7 +5,11 @@ block main
         div.col-lg-4.col-12.align-self-center
             br
             br
-            h2 #{tag.name}
+            - var theStyle = "padding:20px; border-top:5px solid #393C3F; border-bottom:5px solid #393C3F;"
+                if tag.color != null 
+                    - var theStyle = "padding:20px; border-top:5px solid #" + tag.color + "; border-bottom:5px solid #" + tag.color + ";"
+            - var theStyle = theStyle + "font-weight:900;"
+            h2(style=theStyle) #{tag.name}
         div.col-lg-8.col-12.align-self-center
             br
             br

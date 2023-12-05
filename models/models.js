@@ -69,6 +69,10 @@ const Tag = sequelize.define("tag", {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+    },
+    color: {
+        type: DataTypes.STRING,
+        allowNull: true,
     }
 }); 
 
