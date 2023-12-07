@@ -168,21 +168,19 @@ body {
 }
 
 .album-score {
-    /* border: 1px solid black; */
-    /* aspect-ratio: 1 / 1; */
-    height: 7.5em;
-    line-height: 7.5em;
+    width: 9vw;
+    height: 9vw;
+    outline: 1.5px solid black;
     border-radius: 100%;
-    font-size: 2em;
+    margin:1vw;
+    display: inline-block;
 } 
 
+
 .album-score span {
-    border: 1px solid black;
-    aspect-ratio: 1 / 1;
-    border-radius: 100%;
-    padding:1em;
-    padding-top: 1.45em;
-    padding-bottom: 1.45em;
+    font-size: 2.7vw;
+    text-align: center;
+    line-height: 9vw;
 }
 
 .album-score-small {
@@ -282,18 +280,17 @@ body {
     align-items: right;
 }
 
+.album-score-s-wrapper {
+    width: 4.5vw;
+    height: 4.5vw;
+    outline: 3px solid #F2545B;
+    border-radius: 100%;
+    float: right;
+    margin:1vw;
+}
 .album-score-s {
     font-weight: 700;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    outline: 3px solid #F2545B;
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 100%;
-    width: 1.25em;
-    height: 1.25em;
-    padding: 1.1em;
-    padding-top: 1.5em;     
-    padding-bottom: 1.5em;
+    font-size: 1.2vw;
+    text-align: center;
+    line-height: 4.5vw;
 }

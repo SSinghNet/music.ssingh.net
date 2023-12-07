@@ -17,11 +17,10 @@ block main
                             br
                             each artist in alb.artists
                                 //- span.badge.badge-artist
-                                a(href=`/artist/${artist.id}`)
+                                a(href=`/artist/${artist.id}`)(style="font-size:1.1vw;")
                                     img.artist-image-small.me-2(src=`${artist.image}`)
                                     | #{artist.name}
                                 |&nbsp;&nbsp;&nbsp;
-                            br
                             br
                             br
                             table(width="100%")
@@ -29,11 +28,11 @@ block main
                                     td
                                         span.album-release #{alb.releaseDate}
                                     td
-                                        span.album-score-s #{alb.score}%
+                                        div.album-score-s-wrapper 
+                                            span.album-score-s #{alb.score}%
                             br
                             br
-                br
-                br
+                            br                
                 br
                 br
                 

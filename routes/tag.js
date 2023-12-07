@@ -9,7 +9,7 @@ router.get("/:id", async (req, res) => {
         where: { id: req.params.id },
         include: [Album],
         order: [
-            [{ model: Album }, 'releaseDate', 'ASC'],
+            [{ model: Album }, 'score', 'DESC'],
         ]
     });
 
@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
             },
         }, Artist],
         // include: [Artist],
-        order: [["releaseDate", "ASC"]]
+        order: [["score", "DESC"]]
     }).catch((err) => {
         return res.status(500).render("404", {type: err});
     });
