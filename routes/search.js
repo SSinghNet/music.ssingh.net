@@ -19,11 +19,11 @@ router.get("/", async (req, res) => {
                         [Sequelize.Op.like]: `%${req.query.query}%`
                     }
                 }, {
-                    "$Artists.name$": {
+                    "$artists.name$": {
                         [Sequelize.Op.like]: `%${req.query.query}%`
                     },
                 },{
-                    "$Tags.name$": {
+                    "$tags.name$": {
                         [Sequelize.Op.like]: `%${req.query.query}%`
                     },
                 }]
