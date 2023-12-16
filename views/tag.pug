@@ -13,6 +13,18 @@ block main
         div.col-lg-8.col-12.align-self-center
             br
             br
+            form.dropdown
+                input#type(type="hidden", value="tag")
+                label(for="sortBy") sort by: 
+                select#sort(name="sortBy", onchange="sortRedirect()")  
+                    option(value="score ASC") score (0-100)
+                    option(value="score DESC") score (100-0)
+                    option(value="name ASC") name (A-Z)
+                    option(value="name DESC") name (Z-A)
+                    option(value="releaseDate ASC") release date (oldest to newest)
+                    option(value="releaseDate DESC") release date (newest to oldest)
+            script(src="/scripts/sort.js") 
+            
             each album in albums
                 span.badge.badge-album
                     a(href=`/album/${album.id}`) 

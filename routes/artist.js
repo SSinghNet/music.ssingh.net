@@ -1,16 +1,30 @@
 import express from "express";
 import { Album, Artist, Tag } from "../models/models.js";
 import { restAuth } from "../middleware/restAuth.js";
+import { Sequelize } from "sequelize";
 
 export let router = express.Router();
 
 router.get("/:id", async (req, res) => {
+    let sortBy = "releaseDate";
+    let sortOrder = "ASC";
+    
+    if (req.query.sortBy != null) {
+        if (req.query.sortBy == "name" || req.query.sortBy == "releaseDate"|| req.query.sortBy == "score") {
+            sortBy = req.query.sortBy;
+            sortOrder = "ASC";
+        }
+    }
+
+    if (req.query.sortOrder != null) {
+        if (req.query.sortOrder == "ASC" || req.query.sortOrder == "DESC") {
+            sortOrder = req.query.sortOrder;
+        }
+    }
+
     let art = await Artist.findOne({
         where: { id: req.params.id },
         include: [Album],
-        order: [
-            [{ model: Album }, 'releaseDate', 'ASC'],
-        ]
     });
 
     if (art == null) {
@@ -30,17 +44,21 @@ router.get("/:id", async (req, res) => {
             having: {
                 id: art.id
             },
-            include: [{ model: Album, include: [Artist] }],
+            include: [
+                {
+                    model: Album,
+                    include: [{ model: Artist }],
+                },
+            ],        
         },
+        order: [[Sequelize.literal("`artists->albums` ."), sortBy, sortOrder]],
         subQuery: false,
-        // include: [Artist],
-        order: [["releaseDate", "ASC"]]
     }).catch((err) => {
         return res.status(500).render("404", {type: err});
     });
 
     // console.log(await albs[0]["dataValues"].artists[0]["dataValues"].albums);
-
+    // console.log(albs);
     let albs2 = albs[0]["dataValues"].artists[0]["dataValues"].albums;
 
     // let albs = await Album.findAll({ where: { "$Artists.id$": art.id }, include: [Artist] });
