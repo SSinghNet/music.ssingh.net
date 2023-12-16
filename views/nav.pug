@@ -13,9 +13,11 @@ nav.navbar.navbar-expand-md.border-body.sticky-top.nav-fill
                 a.nav-link(href="#") lists
             li.nav-item
                 a.nav-link(href="/random") random
-        form.navbar-form.justify-content-right.col-lg-8(role="search")
+        form.navbar-form.justify-content-right.col-lg-8(role="search", action="/search")
             div.input-group
-                input.form-control(type="search" placeholder="" aria-label="Search")
+                if query == null
+                    - query = ""
+                input.form-control(type="search" value=`${query}` aria-label="Search", name="query")
                 div.input-group-btn
                     button.btn.btn-search(type="submit")
                         i.bi-search

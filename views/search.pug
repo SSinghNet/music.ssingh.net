@@ -1,0 +1,47 @@
+extends default
+block main
+    if noResults
+        h1 no results
+    else 
+        h3 albums
+        if results.albums.length == 0
+            h5 no results 
+        
+        each album in results.albums
+                span.badge.badge-album
+                    a(href=`/album/${album.id}`) 
+                        table
+                            tr
+                                td(rowspan=2)
+                                    img.album-image-small.me-3(src=`${album.image}`)
+                                td #{album.name}
+                                td(rowspan=1).album-score-small #{album.score}%
+                            tr
+                                td.album-artist
+                                    each artist, index in album.artists
+                                        |#{artist.name}
+                                        if index < album.artists.length - 1
+                                            |, 
+                                td.album-year #{album.releaseDate.substr(0,4)}
+                br
+        br
+        h3 artists
+        if results.artists.length == 0
+            h5 no results 
+        each artist in results.artists
+                span.badge.badge-artist
+                    a(href=`/artist/${artist.id}`)
+                        img.artist-image-small.me-2(src=`${artist.image}`)
+                        | #{artist.name}
+        br
+        br
+        h3 tags
+        if results.tags.length == 0
+            h5 no results 
+            br
+        each tag in results.tags
+                - var theStyle = ""
+                if tag.color != null 
+                    - var theStyle = "background-color:#" + tag.color
+                span.badge.badge-tag(style=theStyle)
+                    a(href=`/tag/${tag.id}`) #{tag.name}

@@ -74,7 +74,7 @@ body {
 }
 
 .album-image{
-    width: 25em;
+    width: 20vw;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width:inherit;
     max-width: 70vw;
@@ -86,8 +86,8 @@ body {
 }
 
 .artist-image{
-    width: 25em;
-    height: 25em;
+    width: 23vw;
+    height: 23vw;
     object-fit: cover;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     max-width: 70vw;
@@ -293,4 +293,24 @@ body {
     font-size: 1.2vw;
     text-align: center;
     line-height: 4.5vw;
+}
+
+.dropdown {
+    font-size:1em;
+    font-weight: 500;
+    text-align:center;
+}
+.dropdown label {
+    font-weight: 800;
+    text-decoration: black 1px underline;
+    font-size:1.1em;
+}
+
+.dropdown select {
+    margin: 1em;
+    padding: 0.5em;
+    background-color: #E5E6E4;
+    border:none;
+    outline: #393C3F 2px solid;
+    border-radius: 5px;
 }

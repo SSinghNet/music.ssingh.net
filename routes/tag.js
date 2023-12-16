@@ -5,12 +5,26 @@ import { restAuth } from "../middleware/restAuth.js";
 export let router = express.Router();
 
 router.get("/:id", async (req, res) => {
+
+    let sortBy = "score";
+    let sortOrder = "DESC";
+    
+    if (req.query.sortBy != null) {
+        if (req.query.sortBy == "name" || req.query.sortBy == "releaseDate" || req.query.sortBy == "score") {
+            sortBy = req.query.sortBy;
+            sortOrder = "ASC";
+        }
+    }
+
+    if (req.query.sortOrder != null) {
+        if (req.query.sortOrder == "ASC" || req.query.sortOrder == "DESC") {
+            sortOrder = req.query.sortOrder;
+        }
+    }
+
     let tag = await Tag.findOne({
         where: { id: req.params.id },
         include: [Album],
-        order: [
-            [{ model: Album }, 'score', 'DESC'],
-        ]
     });
 
     if (tag == null) {
@@ -32,7 +46,7 @@ router.get("/:id", async (req, res) => {
             },
         }, Artist],
         // include: [Artist],
-        order: [["score", "DESC"]]
+        order: [[sortBy, sortOrder]]
     }).catch((err) => {
         return res.status(500).render("404", {type: err});
     });
