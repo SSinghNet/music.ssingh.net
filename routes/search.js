@@ -39,7 +39,6 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/album", async (req, res) => {
-    //TODO: make it so it checks the params and searchs based on availiable params
     res.json(await Album.findAll({ where: { name: req.query.name } }));
     // return Album.findAll({ where: { name: req.query.name } });
 }); 

@@ -76,12 +76,29 @@ const Tag = sequelize.define("tag", {
     }
 }); 
 
+const List = sequelize.define("list", {
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    }
+});
+
 Album.belongsToMany(Artist, {through: "Album_Artists"});
-Album.belongsToMany(Tag, {through: "Album_Tags"});
+Album.belongsToMany(Tag, { through: "Album_Tags" });
+Album.belongsToMany(List, { through: "Album_Lists" });
 
 Artist.belongsToMany(Album, {through: "Album_Artists"});
-Tag.belongsToMany(Album, {through: "Album_Tags"});
+Tag.belongsToMany(Album, { through: "Album_Tags" });
+List.belongsToMany(Album, { through: "Album_Lists" });
 
 sequelize.sync();
 
-export {Album, Artist, Tag}
+export {Album, Artist, Tag, List}
