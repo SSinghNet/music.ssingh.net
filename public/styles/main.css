@@ -78,6 +78,8 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width:inherit;
     max-width: 70vw;
+    background: url("/images/no_image.png");
+    background-size: contain;
 }
 
 .album-image-small{
@@ -86,8 +88,8 @@ body {
 }
 
 .artist-image{
-    width: 23vw;
-    height: 23vw;
+    width: 23vmax;
+    height: 23vmax;
     object-fit: cover;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     max-width: 70vw;
@@ -153,8 +155,24 @@ body {
 
 .badge-album {
     margin: .3em;
+    margin-left: 0; margin-right: 0;
     padding: .75em;
     background-color:#393C3F ;
+    /* max-width: calc(100% - 10vw); */
+}
+
+.badge-album-name {
+    min-width: 14vmax;
+    max-width: 50%;
+    font-size: 1.3vmax;
+}
+
+@media (max-width: 1000px){
+    .badge-album-name {
+        /* min-width: 10vmax; */
+        max-width: calc(100% - 10vw);
+        font-size: 1.4vmax;
+    }
 }
 
 .badge-album .album-year {
@@ -168,8 +186,8 @@ body {
 }
 
 .album-score {
-    width: 9vw;
-    height: 9vw;
+    width: 9vmax;
+    height: 9vmax;
     outline: 1.5px solid black;
     border-radius: 100%;
     margin:1vw;
@@ -178,9 +196,9 @@ body {
 
 
 .album-score span {
-    font-size: 2.7vw;
+    font-size: 2.7vmax;
     text-align: center;
-    line-height: 9vw;
+    line-height: 9vmax;
 }
 
 .album-score-small {
@@ -222,7 +240,7 @@ body {
 }
 .album-image-spacer{
     display:inline-block;
-    height: 55%;
+    height: 60%;
 }
 
 .album-item .badge .badge-artist {
@@ -236,13 +254,25 @@ body {
 }
 
 .album-item .album-name {
-    font-size: max(1.1em, 1.4vw);
+    /* font-size: max(1.1em, 1.4vmax); */
+    font-size: calc(15px + 0.8vmax + (0.2vmin));
     font-weight: 600;
+    display: inline-block;
+    /* font-size: 12px; */
+    line-height: calc(15px + 0.8vmax + (0.2vmin));
+    /* white-space: nowrap; */
+    height: calc(20px + 0.8vmax + (0.2vmin));
+    overflow: visible;
+    text-overflow: ellipsis;
 }
 
 .album-item .artist-image-small{
     width: 2em;
     height: 2em;
+}
+
+.album-item .artist-name {
+    font-size: calc(15px + 0.1vmax + (0.1vmin));
 }
 
 .album-item-long {
@@ -277,22 +307,23 @@ body {
 
 
 .album-name .album-release {
-    align-items: right;
+    align-items: center;
 }
 
 .album-score-s-wrapper {
-    width: 4.5vw;
-    height: 4.5vw;
-    outline: 3px solid #F2545B;
+    width: calc(15px + 4vmax);
+    height: calc(15px + 4vmax);
+    outline: .2vw solid #F2545B;
     border-radius: 100%;
     float: right;
-    margin:1vw;
+    
+    margin:1vmax;
 }
 .album-score-s {
     font-weight: 700;
-    font-size: 1.2vw;
+    font-size: calc(11px + 0.6vmax);;
     text-align: center;
-    line-height: 4.5vw;
+    line-height: calc(15px + 4vmax);
 }
 
 .dropdown {

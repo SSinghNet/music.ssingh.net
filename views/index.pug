@@ -17,7 +17,7 @@ block main
                             br
                             each artist in alb.artists
                                 //- span.badge.badge-artist
-                                a(href=`/artist/${artist.id}`)(style="font-size:1.1vw;")
+                                a.artist-name(href=`/artist/${artist.id}`)
                                     img.artist-image-small.me-2(src=`${artist.image}`)
                                     | #{artist.name}
                                 |&nbsp;&nbsp;&nbsp;
@@ -30,6 +30,7 @@ block main
                                     td
                                         div.album-score-s-wrapper 
                                             span.album-score-s #{alb.score}%
+                                    td(style="padding:0.2vmax;")
                             br
                             br
                             br                
