@@ -2,11 +2,12 @@ extends default
 block main
     h1.title #{pageTitle}
     br
+    br
     div.row
         - var count = 1
         - var previousScore = albums[0].score
         each alb in albums
-            div.col-12#album-item-container
+            div.col-lg-4.col-12#album-item-container
                 if previousScore != alb.score
                     -previousScore = alb.score
                     -count++
@@ -14,30 +15,33 @@ block main
                     - var x = " "
                     if count % 2 == 0
                         - var x = "album-item-long-alt"
-                    div.album-item-long(class=x)
-                        table 
-                            tr 
-                                td(style="width:10%") 
-                                    h2 #{count}
-                                td(style="width:30%") 
-                                    img.album-image(src=`${alb.image}`) 
-                                td(style="width:50%") 
-                                    br
-                                    span.album-name #{alb.name}
-                                    br
-                                    br
-                                    each artist in alb.artists
-                                        //- span.badge.badge-artist
-                                        a(href=`/artist/${artist.id}`)
-                                            img.artist-image-small.me-2(src=`${artist.image}`)
-                                            | #{artist.name}
-                                        |&nbsp;&nbsp;&nbsp;
-                                    br
-                                    br
-                                    span.album-release.text-right #{alb.releaseDate}
-
-                                td(style="width:10%") 
-                                    div.album-score-s-wrapper
-                                        span.album-score-s #{alb.score}%
+                    div.album-item-wrapper
+                        div.album-item
+                            img.album-image(src=`${alb.image}`) 
+                            div.album-image-faded 
+                            span.album-image-spacer
+                            span.album-rank #{count}
+                            span.album-name #{alb.name}
+                            br
+                            br
+                            each artist in alb.artists
+                                //- span.badge.badge-artist
+                                a.artist-name(href=`/artist/${artist.id}`)
+                                    img.artist-image-small.me-2(src=`${artist.image}`)
+                                    | #{artist.name}
+                                |&nbsp;&nbsp;&nbsp;
+                            br
+                            br
+                            table(width="100%")
+                                tr 
+                                    td
+                                        span.album-release #{alb.releaseDate}
+                                    td
+                                        div.album-score-s-wrapper 
+                                            span.album-score-s #{alb.score}%
+                                    td(style="padding:0.2vmax;")
+                            br
+                            br
+                            br                
                 br
                 br

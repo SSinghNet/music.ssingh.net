@@ -85,6 +85,8 @@ body {
 .album-image-small{
     width: 4em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: url("/images/no_image.png");
+    background-size: contain;
 }
 
 .artist-image{
@@ -236,11 +238,39 @@ body {
     right: 0; 
     margin-left: auto; 
     margin-right: auto; 
-    
+    background: url("/images/no_image.png");
+    background-size: contain;    
 }
+.album-image-faded {
+    background-color: #22242682;
+    height: 50%;
+    aspect-ratio: 1/1;
+    margin: 1em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: absolute; top: -10%; 
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
 .album-image-spacer{
     display:inline-block;
     height: 60%;
+}
+
+.album-rank {
+    /* background-color: #22242665; */
+    height: 50%;
+    margin: 1em;
+    position: absolute; top: -10%; 
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    font-size: 5em;
+    text-shadow: 0px 4px 0px #222426, 0px -2px 0px #fff;
+    /* line-height: 5em; */
 }
 
 .album-item .badge .badge-artist {
