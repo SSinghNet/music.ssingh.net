@@ -63,7 +63,6 @@ router.post("/", restAuth, async (req, res) => {
 
     if (req.body.tags != null) {
         req.body.tags.forEach(async (tag) => {
-            console.log(tag);
             if (tag["id"] == -1 || tag["id"] == null) {
                 Tag.findOne({ where: { name: tag["name"] } }).then(async (result) => {
                     if (result != null) {

@@ -1,3 +1,6 @@
 extends default 
 block main
     h1.title Lists
+    each list in lists 
+        a(href=`/lists/${list.id}`) #{list.name}
+        br

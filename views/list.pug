@@ -1,0 +1,45 @@
+extends default 
+block main 
+    image.artist-image(src=`${list.image}`)
+    br
+    br
+    h1.title #{list.name}
+    p #{list.description} 
+    br
+    br
+
+    if list.albums.length == 0
+        h5 no albums 
+
+    div.row
+        each alb in list.albums
+            div.col-lg-4.col-12#album-item-container
+                a(href=`/album/${alb.id}`)
+                    div.album-item-wrapper
+                        div.album-item
+                            img.album-image(src=`${alb.image}`) 
+                            span.album-image-spacer
+                            span.album-name #{alb.name}
+                            br
+                            br
+                            each artist in alb.artists
+                                //- span.badge.badge-artist
+                                a.artist-name(href=`/artist/${artist.id}`)
+                                    img.artist-image-small.me-2(src=`${artist.image}`)
+                                    | #{artist.name}
+                                |&nbsp;&nbsp;&nbsp;
+                            br
+                            br
+                            table(width="100%")
+                                tr 
+                                    td
+                                        span.album-release #{alb.releaseDate}
+                                    td
+                                        div.album-score-s-wrapper 
+                                            span.album-score-s #{alb.score}%
+                                    td(style="padding:0.2vmax;")
+                            br
+                            br
+                            br                
+                br
+                br
