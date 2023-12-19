@@ -381,3 +381,28 @@ body {
     outline: #393C3F 2px solid;
     border-radius: 5px;
 }
+
+#list-item-container {
+    background-color: #222426;
+    color:#E5E6E4;
+    margin: 0.5em;
+    padding: 1em;
+    border-radius: 1em;
+    text-align: center;
+}
+#list-item-container a {
+    text-decoration: inherit;
+    color: inherit;
+}
+#list-item-container img {
+    width: 5vmax;
+    height: 5vmax;
+    object-fit: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: url("/images/no_image.png");
+    background-size: contain;
+
+}
+#list-item-container table {
+    width: 100%;
+}
