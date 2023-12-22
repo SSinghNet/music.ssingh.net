@@ -406,3 +406,9 @@ body {
 #list-item-container table {
     width: 100%;
 }
+
+.link {
+    color:inherit;
+    text-decoration-color: #F2545B;
+    font-weight: 700;
+}

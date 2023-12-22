@@ -18,7 +18,9 @@ block main
                         | #{artist.name}
             br
             br
-            h5 #{album.releaseDate}
+            h5 
+                a.link(href=`/year/${album.releaseDate.substr(0,4)}`) #{album.releaseDate.substr(0,4)}
+                |#{album.releaseDate.substr(4)}
             br
             br
             each tag in album.tags

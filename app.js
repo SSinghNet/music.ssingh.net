@@ -11,6 +11,7 @@ import * as search from "./routes/search.js";
 import * as random from "./routes/random.js";
 import * as charts from "./routes/charts.js";
 import * as lists from "./routes/lists.js";
+import * as year from "./routes/year.js";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
@@ -33,6 +34,7 @@ app.use("/search", search.router);
 app.use("/random", random.router);
 app.use("/charts", charts.router);
 app.use("/lists", lists.router);
+app.use("/year", year.router);
 
 app.all("*", (req, res) => {
     res.status(404).render("404", {type: "Page"});

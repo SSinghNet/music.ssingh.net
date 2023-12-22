@@ -1,0 +1,30 @@
+extends default
+block main
+    div.row.align-items-start
+        div.col-lg-4.col-12.align-self-center
+            br
+            br
+            - var theStyle = "padding:20px; border-top:5px solid #393C3F; border-bottom:5px solid #393C3F;"
+            - var theStyle = theStyle + "font-weight:900;"
+            h2(style=theStyle) #{year}
+        div.col-lg-8.col-12.align-self-center
+            br
+            br
+            
+            each album in albums
+                span.badge.badge-album
+                    a(href=`/album/${album.id}`) 
+                        table
+                            tr
+                                td(rowspan=2)
+                                    img.album-image-small.me-3(src=`${album.image}`)
+                                td.badge-album-name #{album.name}
+                                td(rowspan=1).album-score-small #{album.score}%
+                            tr
+                                td.album-artist
+                                    each artist, index in album.artists
+                                        |#{artist.name}
+                                        if index < album.artists.length - 1
+                                            |, 
+                                td.album-year #{album.releaseDate.substr(0,4)}
+                br
