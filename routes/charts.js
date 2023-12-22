@@ -13,7 +13,8 @@ router.get("/", async (req, res) => {
 
     if (req.query.year != null) {
         albums = await Album.findAll({
-            where: sequelize.where(sequelize.literal("CAST(SUBSTR(releaseDate, 1, 4) AS integer)"), req.query.year),
+            // where: sequelize.where(sequelize.literal("CAST(SUBSTR(releaseDate, 1, 4) AS integer)"), req.query.year),
+            where: sequelize.where(sequelize.literal("CAST(SUBSTR(releaseDate, 1, 4) AS CHAR)"), req.query.year),
             order: [
                 ['score', 'DESC'],
             ],

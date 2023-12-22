@@ -347,8 +347,8 @@ body {
 }
 
 .album-score-s-wrapper {
-    width: calc(15px + 4vmax);
-    height: calc(15px + 4vmax);
+    width: calc(15px + 3.5vmax);
+    height: calc(15px + 3.5vmax);
     outline: .2vw solid #F2545B;
     border-radius: 100%;
     float: right;
@@ -359,7 +359,7 @@ body {
     font-weight: 700;
     font-size: calc(11px + 0.6vmax);;
     text-align: center;
-    line-height: calc(15px + 4vmax);
+    line-height: calc(15px + 3.5vmax);
 }
 
 .dropdown {
