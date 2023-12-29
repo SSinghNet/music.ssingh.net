@@ -6,6 +6,8 @@ block main
     
     div.row
         each alb in albums
+            if !alb.listenedTo
+                - continue
             div.col-lg-4.col-12#album-item-container
                 a(href=`/album/${alb.id}`)
                     div.album-item-wrapper

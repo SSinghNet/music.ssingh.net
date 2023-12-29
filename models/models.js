@@ -50,6 +50,15 @@ const Album = sequelize.define("album", {
     review: {
         type: DataTypes.STRING,
         allowNull:true
+    },
+    listenedTo: {
+        type: DataTypes.VIRTUAL,
+        get() {
+            return !((this.score == null) || (this.score == ""));
+        },
+        set() {
+            throw new Error("listenedTo can't be set");
+        }
     }
 }); 
 

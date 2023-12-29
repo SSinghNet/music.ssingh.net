@@ -15,11 +15,13 @@ block main
     if albums.length == 0
         h5 no results 
     else
-        div.row
-            
+        div.row            
             - var count = 1
             - var previousScore = albums[0].score
             each alb in albums
+                if !alb.listenedTo
+                    - count--
+                    - continue
                 div.col-lg-4.col-12#album-item-container
                     if previousScore != alb.score
                         -previousScore = alb.score
