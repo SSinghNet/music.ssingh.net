@@ -5,6 +5,7 @@ body {
     color: #E5E6E4;
     margin: 0px;
     letter-spacing: 0.02em;
+    height: 100%;
 }
 
 
@@ -411,4 +412,80 @@ body {
     color:inherit;
     text-decoration-color: #F2545B;
     font-weight: 700;
+}
+
+.admin {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    background-color: #181A1C;
+    font-size: 1em;
+    color:#E5E6E4;
+    padding: 1em;
+    /* border-radius: 0.2em; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    align-items: center;
+    height: 100%;
+    display: block;
+    text-align: center;
+    font-weight: 700;
+}
+
+.sidebar img {
+    width: 35px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 100%;
+}
+
+.sidebar-element {
+    text-decoration: inherit;
+    color:inherit;
+    display: block;
+    margin: 1em;
+    padding: 1em;
+    font-weight: 300;
+    background-color:#222426;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.sidebar .active {
+    color:#ee6b71;
+}
+
+.sidebar-content {
+    width: 100%;
+    height: 100%;
+    background-color: #CFD2CD;
+    color:#222426;
+    padding: 1em;
+    display: inline-block;
+    /* overflow: hidden; */
+    overflow:scroll;
+    scrollbar-color:#393C3F #181A1C ;
+}
+
+html, body{
+    min-height: 100% !important;
+    height: 100%;
+    scrollbar-color:#393C3F #181A1C ;
+}
+
+.sidebar-content table {
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;    
+    margin-bottom: 6em;
+
+}
+
+.sidebar-content td{
+    border: 1px solid black;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    /* display: inline-block; */
 }

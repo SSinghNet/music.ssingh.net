@@ -1,0 +1,13 @@
+extends admindefault
+block main
+    h1.title Admin 
+    table
+        each item in items 
+            tr
+            each thing in item["dataValues"]
+                td 
+                    //- if (typeof thing) == "object"
+                    //-     each t in thing 
+                    //-         p #{t}
+                    //- else
+                    p #{typeof thing}
