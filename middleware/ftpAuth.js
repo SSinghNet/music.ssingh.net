@@ -11,7 +11,7 @@ export const connectToMediaServer = async () => {
             secure: false,
         });
         console.log(await client.list());
-        await client.uploadFrom("images/no_image.png", "media.ssingh.net/music/albums/test.png");
+        await client.uploadFrom("/images/no_image.png", "media.ssingh.net/music/albums/test2.png");
     } catch (err) {
         console.log(err);
     }
