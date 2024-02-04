@@ -1,6 +1,6 @@
 import express from "express";
 import { Album, Artist, Tag } from "../models/models.js";
-import { connectToMediaServer } from "../middleware/ftpAuth.js";
+import { uploadFileToMediaServer } from "../middleware/ftpAuth.js";
 
 export let router = express.Router();
 
@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
         ['updatedAt', 'DESC'],
     ]});
 
-    connectToMediaServer();
+    uploadFileToMediaServer();
 
     res.render("index", { title: "Home - ", albums: albs });
 });
