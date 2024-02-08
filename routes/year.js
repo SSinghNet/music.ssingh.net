@@ -21,5 +21,5 @@ router.get("/:year", async (req, res) => {
         include: [Artist, Tag]
     });
 
-    res.render("year", {"title": `${req.params.year} - `, "albums": albums, "year": year});
+    res.render("year", {"title": `${req.params.year}`, "albums": albums, "year": year});
 });
