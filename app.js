@@ -36,7 +36,9 @@ app.use("/random", random.router);
 app.use("/charts", charts.router);
 app.use("/lists", lists.router);
 app.use("/year", year.router);
-app.use("/img", img.router);
+if (process.env.BUCKET != null) {
+    app.use("/img", img.router);
+}
 
 app.all("*", (req, res) => {
     res.status(404).render("404", {type: "Page"});
