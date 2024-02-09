@@ -2,6 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import * as url from "url";
 
+import path from "path";
+
 import * as index from "./routes/index.js";
 import * as album from "./routes/album.js";
 import * as artist from "./routes/artist.js";
@@ -21,27 +23,33 @@ const app = express();
 app.set("view engine", "pug");
 app.use(express.static(__dirname + "/public"));
 
+const cacheTime = 86400000 * 30;
+app.use(express.static(path.join(__dirname, 'public'), {
+    maxAge: cacheTime
+}));
+
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
-})); 
+}));
 
-app.use("/", index.router);
-app.use("/album", album.router);
-app.use("/artist", artist.router);
-app.use("/tag", tag.router);
-app.use("/db", databaseValues.router);
-app.use("/search", search.router);
-app.use("/random", random.router);
-app.use("/charts", charts.router);
-app.use("/lists", lists.router);
-app.use("/year", year.router);
-if (process.env.BUCKET != null) {
+if (process.env.NODE_ENV == "img") {
     app.use("/img", img.router);
+} else {
+    app.use("/", index.router);
+    app.use("/album", album.router);
+    app.use("/artist", artist.router);
+    app.use("/tag", tag.router);
+    app.use("/db", databaseValues.router);
+    app.use("/search", search.router);
+    app.use("/random", random.router);
+    app.use("/charts", charts.router);
+    app.use("/lists", lists.router);
+    app.use("/year", year.router);
 }
 
 app.all("*", (req, res) => {
-    res.status(404).render("404", {type: "Page"});
+    res.status(404).render("404", { type: "Page" });
 });
 
 app.listen(7000);
