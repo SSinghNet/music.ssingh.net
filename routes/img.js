@@ -1,6 +1,7 @@
 import express from "express";
 import AWS from "aws-sdk";
 import request from "request";
+import { restAuth } from "../middleware/restAuth.js";
 
 export let router = express.Router();
 
@@ -16,7 +17,7 @@ router.get("/", async (req, res) => {
     res.send(s3File.Body);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", restAuth, async (req, res) => {
     let url = encodeURI(req.body.url);
     let key = req.body.key;
 
