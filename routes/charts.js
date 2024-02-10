@@ -7,6 +7,23 @@ router.get("/", async (req, res) => {
     let albums;
     let pageTitle = "Top Albums of ";
 
+    let page = 0
+    let amount = 21
+
+    const count = await Album.count();
+
+    let pageIn = req.query.page;
+
+    try {
+        if (pageIn != null) {
+            if (typeof parseInt(pageIn) === "number" && (count / amount) > (pageIn)) {
+                page = parseInt(pageIn);
+            }
+        }
+    } catch {
+        console.log("L");
+    }
+
     if (isNaN(req.query.year) || (req.query.year).length != 4) {
         req.query.year = null;
     }
@@ -18,7 +35,9 @@ router.get("/", async (req, res) => {
             order: [
                 ['score', 'DESC'],
             ],
-            include: [Artist, Tag]
+            include: [Artist, Tag],
+            limit: amount + 1,
+            offset: page != 0 ? amount * page + 1: 0
         });
         pageTitle += req.query.year;
     } else {
@@ -26,10 +45,12 @@ router.get("/", async (req, res) => {
             order: [
                 ['score', 'DESC'],
             ],
-            include: [Artist, Tag]
+            include: [Artist, Tag],
+            limit: amount + 1,
+            offset: page != 0 ? amount * page + 1: 0
         });
         pageTitle += "All-Time"; 
     }
 
-    res.render("charts", {"title": "Charts - ", "albums": albums, "pageTitle": pageTitle});
+    res.render("charts", {"title": "Charts - ", "albums": albums, "pageTitle": pageTitle, page: page, maxPage: count / amount, offset: (amount * page)});
 });

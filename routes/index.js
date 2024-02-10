@@ -8,7 +8,6 @@ router.get("/", async (req, res) => {
     let amount = 21
 
     const count = await Album.count();
-    console.log(count);
 
     let pageIn = req.query.page;
 

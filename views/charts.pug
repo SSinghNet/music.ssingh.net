@@ -5,7 +5,7 @@ block main
         label(for="year") year:
             select#year(name="year", onchange="yearRedirect()")  
                 option(value="all-time") All-Time
-                - var year = 2023
+                - var year = 2024
                 while year > 1950 
                     option(value=`${year}`) #{year}
                     - year--
@@ -16,16 +16,16 @@ block main
         h5 no results 
     else
         div.row            
-            - var count = 1
-            - var previousScore = albums[0].score
+            - var count = 1 + (offset > 0 ? offset - 1 : 0)
+            //- - var previousScore = albums[0].score
             each alb in albums
                 if !alb.listenedTo
                     - count--
                     - continue
                 div.col-lg-4.col-12#album-item-container
-                    if previousScore != alb.score
-                        -previousScore = alb.score
-                        -count++
+                    //- if previousScore != alb.score
+                    //-     -previousScore = alb.score
+                    -count++
                     a(href=`/album/${alb.id}`)
                         div.album-item-wrapper
                             div.album-item
@@ -57,3 +57,10 @@ block main
                                 br                
                     br
                     br
+        if page-1 >= 0 && page-1 <= maxPage-1
+            span.badge.badge-tag(style="font-size:1em;")
+                a(href=`/charts?page=${page-1}`) <
+        
+        if page+1 <= maxPage-1
+            span.badge.badge-tag(style="font-size:1em;")
+                a(href=`/charts?page=${page+1}`) >
