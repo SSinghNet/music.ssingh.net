@@ -90,6 +90,7 @@ body {
 }
 
 .artist-image{
+    border: 4px solid black;
     width: 23vmax;
     height: 23vmax;
     object-fit: cover;
