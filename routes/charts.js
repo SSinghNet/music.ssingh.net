@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     let pageTitle = "Top Albums of ";
 
     let page = 0
-    let amount = 20
+    let amount = 21
 
     let year = null;
 
