@@ -39,11 +39,11 @@ block main
                 br
                 br
     if page-1 >= 0 && page-1 <= maxPage-1
-        span.badge.badge-tag
+        span.badge.badge-tag(style="font-size:1em;")
             a(href=`/?page=${page-1}`) <
     
     if page+1 <= maxPage-1
-        span.badge.badge-tag
+        span.badge.badge-tag(style="font-size:1em;")
             a(href=`/?page=${page+1}`) >    
 
 
