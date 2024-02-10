@@ -33,20 +33,17 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-if (process.env.NODE_ENV == "img") {
-    app.use("/img", img.router);
-} else {
-    app.use("/", index.router);
-    app.use("/album", album.router);
-    app.use("/artist", artist.router);
-    app.use("/tag", tag.router);
-    app.use("/db", databaseValues.router);
-    app.use("/search", search.router);
-    app.use("/random", random.router);
-    app.use("/charts", charts.router);
-    app.use("/lists", lists.router);
-    app.use("/year", year.router);
-}
+app.use("/img", img.router);
+app.use("/", index.router);
+app.use("/album", album.router);
+app.use("/artist", artist.router);
+app.use("/tag", tag.router);
+app.use("/db", databaseValues.router);
+app.use("/search", search.router);
+app.use("/random", random.router);
+app.use("/charts", charts.router);
+app.use("/lists", lists.router);
+app.use("/year", year.router);
 
 app.all("*", (req, res) => {
     res.status(404).render("404", { type: "Page" });

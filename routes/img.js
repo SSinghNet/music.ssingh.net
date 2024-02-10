@@ -5,11 +5,27 @@ import { restAuth } from "../middleware/restAuth.js";
 
 export let router = express.Router();
 
-const s3 = new AWS.S3();
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+const region = process.env.AWS_REGION;
+const Bucket = process.env.BUCKET;
+
+const s3 = new AWS.S3({
+    credentials: {
+        accessKeyId,
+        secretAccessKey
+    },
+    region
+});
 
 router.get("/", async (req, res) => {
+    if (req.query.key == null) {
+        res.send("no key provided");
+        return;
+    }
+
     let s3File = await s3.getObject({
-        Bucket: process.env.BUCKET,
+        Bucket: Bucket,
         Key: req.query.key,
     }).promise();
 
@@ -45,7 +61,7 @@ router.post("/", restAuth, async (req, res) => {
                 console.log("Error: ", err);
                 res.send(err);
             } else {
-                res.send("Success: " +  key);
+                res.send("Success: " + key);
             }
         });
     });
