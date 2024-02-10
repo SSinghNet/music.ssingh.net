@@ -5,34 +5,29 @@ block main
         label(for="year") year:
             select#year(name="year", onchange="yearRedirect()")  
                 option(value="all-time") All-Time
-                - var year = 2024
-                while year > 1950 
-                    option(value=`${year}`) #{year}
-                    - year--
+                - var year2 = 2024
+                while year2 > 1950 
+                    option(value=`${year2}`) #{year2}
+                    - year2--
     script(src="/scripts/chartYear.js") 
     br
     br
     if albums.length == 0
         h5 no results 
     else
-        div.row            
-            - var count = 1 + (offset > 0 ? offset - 1 : 0)
-            //- - var previousScore = albums[0].score
+        div.row        
+            - var count = 2 + offset-1
             each alb in albums
                 if !alb.listenedTo
-                    - count--
                     - continue
                 div.col-lg-4.col-12#album-item-container
-                    //- if previousScore != alb.score
-                    //-     -previousScore = alb.score
-                    -count++
                     a(href=`/album/${alb.id}`)
                         div.album-item-wrapper
                             div.album-item
                                 img.album-image(src=`${alb.image}`) 
                                 div.album-image-faded 
                                 span.album-image-spacer
-                                span.album-rank #{count}
+                                span.album-rank #{count++}
                                 span.album-name #{alb.name}
                                 br
                                 br
@@ -59,8 +54,8 @@ block main
                     br
         if page-1 >= 0 && page-1 <= maxPage-1
             span.badge.badge-tag(style="font-size:1em;")
-                a(href=`/charts?page=${page-1}`) <
+                a(href=`/charts?page=${page-1}&year=${year}`) <
         
         if page+1 <= maxPage-1
             span.badge.badge-tag(style="font-size:1em;")
-                a(href=`/charts?page=${page+1}`) >
+                a(href=`/charts?page=${page+1}&year=${year}`) >

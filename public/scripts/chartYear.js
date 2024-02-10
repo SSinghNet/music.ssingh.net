@@ -4,6 +4,7 @@ const yearRedirect = () => {
         let values = value.split(" ")
     
         url.searchParams.set('year', values[0]);
+        url.searchParams.set('page', 0);
     
         window.location.replace(url);
 };
