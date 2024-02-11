@@ -16,7 +16,7 @@ block main
         h5 no results 
     else
         div.row        
-            - var count = 1 + (offset > 0 ? offset: 0)
+            - var count = 1 + (offset > 0 ? offset + 1: 0)
             each alb in albums
                 if !alb.listenedTo
                     - continue
