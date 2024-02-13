@@ -4,8 +4,8 @@ import { Album, Artist, Tag } from "../models/models.js";
 export let router = express.Router();
 
 router.get("/", async (req, res) => {
-    let page = 0
-    let amount = 21
+    let page = 0;
+    let amount = 21;
 
     const count = await Album.count();
 

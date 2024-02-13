@@ -5,12 +5,48 @@ import { Sequelize } from "sequelize";
 
 export let router = express.Router();
 
+router.get("/", async (req, res) => {
+    if (req.query.format != "json") {
+        res.status(404).render("404");
+        return;
+    }
+    let page = 0;
+    let amount = 21;
+
+    const count = await Artist.count();
+
+    let pageIn = req.query.page;
+
+    try {
+        if (pageIn != null) {
+            if (typeof parseInt(pageIn) === "number" && (count / amount) > (pageIn)) {
+                page = parseInt(pageIn);
+            }
+        }
+    } catch {
+        console.log("L");
+    }
+
+    // page = req.query.page;
+
+    let arts = await Artist.findAll({
+        include: [Album],
+        order: [
+            ['updatedAt', 'DESC'],
+        ],
+        limit: amount + 1,
+        offset: page != 0 ? amount * page + 1 : 0
+    });
+
+    res.status(200).json(arts);
+});
+
 router.get("/:id", async (req, res) => {
     let sortBy = "releaseDate";
     let sortOrder = "ASC";
-    
+
     if (req.query.sortBy != null) {
-        if (req.query.sortBy == "name" || req.query.sortBy == "releaseDate"|| req.query.sortBy == "score") {
+        if (req.query.sortBy == "name" || req.query.sortBy == "releaseDate" || req.query.sortBy == "score") {
             sortBy = req.query.sortBy;
             sortOrder = "ASC";
         }
@@ -28,7 +64,7 @@ router.get("/:id", async (req, res) => {
     });
 
     if (art == null) {
-        res.status(404).render("404", {type: "Artist"});
+        res.status(404).render("404", { type: "Artist" });
         return;
     }
 
@@ -49,12 +85,12 @@ router.get("/:id", async (req, res) => {
                     model: Album,
                     include: [{ model: Artist }],
                 },
-            ],        
+            ],
         },
         order: [[Sequelize.literal("`artists->albums` ."), sortBy, sortOrder]],
         subQuery: false,
     }).catch((err) => {
-        return res.status(500).render("404", {type: err});
+        return res.status(500).render("404", { type: err });
     });
 
     // console.log(await albs[0]["dataValues"].artists[0]["dataValues"].albums);
@@ -63,8 +99,8 @@ router.get("/:id", async (req, res) => {
 
     // let albs = await Album.findAll({ where: { "$Artists.id$": art.id }, include: [Artist] });
     // console.log(albs[0].artists)
-    
-    res.status(200).render("artist", {artist: art, albums: albs2});
+
+    res.status(200).render("artist", { artist: art, albums: albs2 });
 });
 
 router.post("/", restAuth, async (req, res) => {
@@ -78,9 +114,9 @@ router.post("/", restAuth, async (req, res) => {
 });
 
 router.put("/:id", restAuth, async (req, res) => {
-    let art = await Artist.findOne({ where: { id: req.params.id }});
+    let art = await Artist.findOne({ where: { id: req.params.id } });
     if (art == null) {
-        res.status(404).render("404", {type: "Artist"});
+        res.status(404).render("404", { type: "Artist" });
         return;
     }
 
@@ -92,10 +128,10 @@ router.put("/:id", restAuth, async (req, res) => {
 });
 
 router.delete("/:id", restAuth, async (req, res) => {
-    let art = await Artist.findOne({ where: { id: req.params.id }});
+    let art = await Artist.findOne({ where: { id: req.params.id } });
 
     if (art == null) {
-        res.status(404).render("404", {type: "Artist"});
+        res.status(404).render("404", { type: "Artist" });
         return;
     }
 

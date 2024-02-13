@@ -4,6 +4,42 @@ import { restAuth } from "../middleware/restAuth.js";
 
 export let router = express.Router();
 
+router.get("/", async (req, res) => {
+    if (req.query.format != "json") {
+        res.status(404).render("404");
+        return;
+    }
+    let page = 0;
+    let amount = 21;
+
+    const count = await Album.count();
+
+    let pageIn = req.query.page;
+
+    try {
+        if (pageIn != null) {
+            if (typeof parseInt(pageIn) === "number" && (count / amount) > (pageIn)) {
+                page = parseInt(pageIn);
+            }
+        }
+    } catch {
+        console.log("L");
+    }
+
+    // page = req.query.page;
+
+    let albs = await Album.findAll({
+        include: [Artist, Tag],
+        order: [
+            ['updatedAt', 'DESC'],
+        ],
+        limit: amount + 1,
+        offset: page != 0 ? amount * page + 1: 0
+    });
+
+    res.status(200).json(albs);
+});
+
 /**
  * @param id 
  * @param format accepts json (defaults to default)
