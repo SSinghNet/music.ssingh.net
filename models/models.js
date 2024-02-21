@@ -82,6 +82,12 @@ const Tag = sequelize.define("tag", {
     color: {
         type: DataTypes.STRING,
         allowNull: true,
+    }, 
+    rym: {
+        type: DataTypes.VIRTUAL,
+        get() {
+            return "https://rateyourmusic.com/genre/" + this.name.replace(/ /g, "-");
+        }
     }
 }); 
 

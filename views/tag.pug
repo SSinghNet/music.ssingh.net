@@ -10,6 +10,8 @@ block main
                     - var theStyle = "padding:20px; border-top:5px solid #" + tag.color + "; border-bottom:5px solid #" + tag.color + ";"
             - var theStyle = theStyle + "font-weight:900;"
             h2(style=theStyle) #{tag.name}
+            span.badge.badge-tag(style="background-color:#152238")
+                a(href=`${tag.rym}` target="_blank") RYM
         div.col-lg-8.col-12.align-self-center
             br
             br
