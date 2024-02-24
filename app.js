@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import * as url from "url";
 
 import path from "path";
+import cors from "cors";
 
 import * as index from "./routes/index.js";
 import * as album from "./routes/album.js";
@@ -27,6 +28,8 @@ const cacheTime = 86400000 * 30;
 app.use(express.static(path.join(__dirname, 'public'), {
     maxAge: cacheTime
 }));
+
+app.use(cors());
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
