@@ -3,6 +3,8 @@ import sanitizeHtml from 'sanitize-html';
 import { Album, Artist, Tag } from "../models/models.js";
 import { restAuth } from "../middleware/restAuth.js";
 
+import * as discord from "../controllers/discord.js";
+
 export let router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -123,6 +125,9 @@ router.post("/", restAuth, async (req, res) => {
     }
 
     await alb.save();
+
+    discord.sendMessage(`https://music.ssingh.net/album/${alb.id}`);
+
     res.status(201).json(alb);
 
 });

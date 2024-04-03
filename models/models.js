@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import { DataTypes } from "sequelize";
-import "dotenv/config"
+import "dotenv/config";
 
 // export const sequelize = new Sequelize("sqlite::memory:");
 const getDb = () => {

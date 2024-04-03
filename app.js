@@ -5,6 +5,8 @@ import * as url from "url";
 import path from "path";
 import cors from "cors";
 
+import * as discord from "./controllers/discord.js";
+
 import * as index from "./routes/index.js";
 import * as album from "./routes/album.js";
 import * as artist from "./routes/artist.js";
@@ -18,6 +20,8 @@ import * as year from "./routes/year.js";
 import * as img from "./routes/img.js";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+
+discord.client.login(process.env.DISCORD_TOKEN);
 
 const app = express();
 
