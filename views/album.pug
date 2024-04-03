@@ -5,9 +5,12 @@ block meta
     each artist in album.artists
         - artists += `${artist.name}, `
     //- - artists = artists.substring(0, artists.length - 1);
+    - var desc = `${album.score}% - ${album.review}`
+    if album.review.length < 1
+        - desc = desc.substr(0, desc.length - 3)
 
     meta(content=`${album.name} - ${artists.substr(0, artists.length - 2)}` property="og:title")
-    meta(content=`${album.score}% - ${album.review}` property="og:description")
+    meta(content=`${desc}` property="og:description")
     meta(content=`https://music.ssingh.net/album/${album.id}` property="og:url")
     meta(content=`${album.image}` property="og:image")
 
