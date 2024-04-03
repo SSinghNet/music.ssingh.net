@@ -5,7 +5,7 @@ block meta
     each artist in album.artists
         - artists += `${artist.name}, `
     //- - artists = artists.substring(0, artists.length - 1);
-    - var desc = `${album.score}% - ${album.review}`
+    - var desc = `${album.score}% - ${descCleansed}`
     if album.review.length < 1
         - desc = desc.substr(0, desc.length - 3)
 

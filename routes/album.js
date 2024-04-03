@@ -1,4 +1,5 @@
 import express from "express";
+import sanitizeHtml from 'sanitize-html';
 import { Album, Artist, Tag } from "../models/models.js";
 import { restAuth } from "../middleware/restAuth.js";
 
@@ -34,7 +35,7 @@ router.get("/", async (req, res) => {
             ['updatedAt', 'DESC'],
         ],
         limit: amount + 1,
-        offset: page != 0 ? amount * page + 1: 0
+        offset: page != 0 ? amount * page + 1 : 0
     });
 
     res.status(200).json(albs);
@@ -45,10 +46,10 @@ router.get("/", async (req, res) => {
  * @param format accepts json (defaults to default)
  */
 router.get("/:id", async (req, res) => {
-    let alb = await Album.findOne({ where: { id: req.params.id }, include: [Artist, Tag]});
+    let alb = await Album.findOne({ where: { id: req.params.id }, include: [Artist, Tag] });
 
     if (alb == null) {
-        res.status(404).render("404", {type: "Album"});
+        res.status(404).render("404", { type: "Album" });
         return;
     }
 
@@ -56,8 +57,15 @@ router.get("/:id", async (req, res) => {
         res.status(200).json(alb);
         return;
     }
+
+    let desc = sanitizeHtml(alb.review, {
+        allowedTags: [],
+        allowedAttributes: []
+    });
     
-    res.status(200).render("album", {title: `${alb.name} - ` , album: alb});
+    alb.review = sanitizeHtml(alb.review);
+
+    res.status(200).render("album", { title: `${alb.name} - `, album: alb, descCleansed: desc });
 });
 
 /**
@@ -70,13 +78,13 @@ router.get("/:id", async (req, res) => {
  * @param tags array of album tags (optional) [id, name] (tagid = -1 when newTag)
  */
 router.post("/", restAuth, async (req, res) => {
-    let alb = Album.build({ 
+    let alb = Album.build({
         name: req.body.name,
         image: req.body.image,
         releaseDate: req.body.releaseDate,
         score: req.body.score,
         review: req.body.review,
-    }, { 
+    }, {
         include: [Artist, Tag]
     });
 
@@ -132,10 +140,10 @@ router.post("/", restAuth, async (req, res) => {
 router.put("/:id", restAuth, async (req, res) => {
     let alb = await Album.findOne({ where: { id: req.params.id }, include: [Artist, Tag] });
     if (alb == null) {
-        res.status(404).render("404", {type: "Album"});
+        res.status(404).render("404", { type: "Album" });
         return;
     }
- 
+
     if (req.body.name != null) alb.name = req.body.name;
     if (req.body.image != null) alb.image = req.body.image;
     if (req.body.releaseDate != null) alb.releaseDate = req.body.releaseDate;
@@ -190,10 +198,10 @@ router.put("/:id", restAuth, async (req, res) => {
 });
 
 router.delete("/:id", restAuth, async (req, res) => {
-    let alb = await Album.findOne({ where: { id: req.params.id }, include: [Artist, Tag]});
+    let alb = await Album.findOne({ where: { id: req.params.id }, include: [Artist, Tag] });
 
     if (alb == null) {
-        res.status(404).render("404", {type: "Album"});
+        res.status(404).render("404", { type: "Album" });
         return;
     }
 
