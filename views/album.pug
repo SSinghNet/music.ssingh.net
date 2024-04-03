@@ -1,5 +1,11 @@
 extends default 
 
+block meta
+    meta(content=`${album.name}` property="og:title")
+    meta(content=`${album.score}%` property="og:description")
+    meta(content=`https://music.ssingh.net/album/${album.id}` property="og:url")
+    meta(content=`${album.image}` property="og:image")
+
 block main
     div.row.align-items-start
         div.col-lg-6.col-12.align-self-center
