@@ -1,8 +1,13 @@
 extends default 
 
 block meta
-    meta(content=`${album.name}` property="og:title")
-    meta(content=`${album.score}%` property="og:description")
+    - var artists = ""
+    each artist in album.artists
+        - artists += `${artist.name}, `
+    //- - artists = artists.substring(0, artists.length - 1);
+
+    meta(content=`${album.name} - ${artists.substr(0, artists.length - 2)}` property="og:title")
+    meta(content=`${album.score}% - ${album.review}` property="og:description")
     meta(content=`https://music.ssingh.net/album/${album.id}` property="og:url")
     meta(content=`${album.image}` property="og:image")
 
