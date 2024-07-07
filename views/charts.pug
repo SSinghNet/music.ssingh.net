@@ -34,7 +34,8 @@ block main
                                 each artist in alb.artists
                                     //- span.badge.badge-artist
                                     a.artist-name(href=`/artist/${artist.id}`)
-                                        img.artist-image-small.me-2(src=`${artist.image}`)
+                                        if artist.image != null
+                                            img.artist-image-small.me-2(src=`${artist.image}`)
                                         | #{artist.name}
                                     |&nbsp;&nbsp;&nbsp;
                                 br
