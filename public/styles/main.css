@@ -15,12 +15,12 @@ body {
 }
 
 
-.page-footer{
+.page-footer {
     background-color: #222426;
     padding: 20px 0;
 }
 
-.navbar{
+.navbar {
     background-color: #181A1C;
     padding: 0.4em;
 }
@@ -29,41 +29,49 @@ body {
     width: 35px;
 }
 
-.nav-link{
+.nav-link {
     color: #E5E6E4;
     text-align: right;
-    font-size: 1em ;
+    font-size: 1em;
 }
 
-.nav-link:active, .nav-link:hover, .nav-link:focus{
+.nav-link:active,
+.nav-link:hover,
+.nav-link:focus {
     color: #E5E6E4;
 }
 
-.nav-link:active, .nav-link:hover {
+.nav-link:active,
+.nav-link:hover {
     -webkit-text-decoration-line: underline;
-            text-decoration-line: underline;
+    text-decoration-line: underline;
     -webkit-text-decoration-color: #F2545B;
-            text-decoration-color: #F2545B;
+    text-decoration-color: #F2545B;
 }
 
 .navbar-brand {
     color: #F2545B;
     /* font-weight: bold; */
-    font-size: 1.4em ;
+    font-size: 1.4em;
 }
 
-.navbar-brand:hover, .navbar-brand:active, .navbar-brand:focus {
+.navbar-brand:hover,
+.navbar-brand:active,
+.navbar-brand:focus {
     color: #F2545B;
 }
 
-.btn-search, .form-control{
+.btn-search,
+.form-control {
     font-family: "Didact Gothic";
-    background-color:#CFD2CD;
+    background-color: #CFD2CD;
     border-radius: 0;
 }
 
-.btn-search:hover, .btn-search:focus, .btn-search:active {
-    background-color:#CFD2CD;
+.btn-search:hover,
+.btn-search:focus,
+.btn-search:active {
+    background-color: #CFD2CD;
 }
 
 .btn-search {
@@ -71,62 +79,65 @@ body {
     border-bottom-right-radius: 0.5em;
 }
 
-.form-control{
+.form-control {
     border-top-left-radius: 0.5em;
-    border-bottom-left-radius: 0.5em;  
-    font-size: 1em ;
+    border-bottom-left-radius: 0.5em;
+    font-size: 1em;
 }
- 
-.form-control::-moz-selection{
-    background-color:#CFD2CD;
-    border: 0px solid black;
-}
- 
-.form-control:hover, .form-control::selection, .form-control:active, .form-control:focus{
-    background-color:#CFD2CD;
+
+.form-control::-moz-selection {
+    background-color: #CFD2CD;
     border: 0px solid black;
 }
 
-.album-image{
+.form-control:hover,
+.form-control::selection,
+.form-control:active,
+.form-control:focus {
+    background-color: #CFD2CD;
+    border: 0px solid black;
+}
+
+.album-image {
     width: 20vw;
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width:inherit;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: inherit;
     max-width: 70vw;
     background: url("/images/no_image.png");
     background-size: contain;
 }
 
-.album-image-small{
+.album-image-small {
     width: 4em;
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: url("/images/no_image.png");
     background-size: contain;
 }
 
-.artist-image{
+.artist-image {
     border: 4px solid black;
     width: 23vmax;
     height: 23vmax;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     max-width: 70vw;
     border-radius: 10%;
     background: url("/images/no_image.png");
     background-size: contain;
 }
 
-.artist-image-small{
+.artist-image-small {
     width: 3em;
     height: 3em;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     border-radius: 100%;
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: url("/images/no_image.png");
     background-size: contain;
 }
@@ -150,10 +161,10 @@ body {
     text-decoration: none;
     color: #E5E6E4;
     font-family: "Didact Gothic";
-    font-size:1.2em;
+    font-size: 1.2em;
 }
 
-.badge-tag{
+.badge-tag {
     background-color: #393C3F;
     margin: .3em;
     padding: .75em;
@@ -163,11 +174,11 @@ body {
     text-decoration: none;
     color: #393C3F;
     font-family: "Didact Gothic";
-    font-size:1.3em;
+    font-size: 1.3em;
     font-weight: 500;
 }
 
-.badge-artist{
+.badge-artist {
     /* background-color: #393C3F; */
     margin: .3em;
     padding: .75em;
@@ -177,14 +188,15 @@ body {
     text-decoration: none;
     color: #E5E6E4;
     font-family: "Didact Gothic";
-    font-size:1.5em;
+    font-size: 1.5em;
 }
 
 .badge-album {
     margin: .3em;
-    margin-left: 0; margin-right: 0;
+    margin-left: 0;
+    margin-right: 0;
     padding: .75em;
-    background-color:#393C3F ;
+    background-color: #393C3F;
     /* max-width: calc(100% - 10vw); */
 }
 
@@ -194,7 +206,7 @@ body {
     font-size: 1.3vmax;
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
     .badge-album-name {
         /* min-width: 10vmax; */
         max-width: calc(100% - 10vw);
@@ -203,12 +215,12 @@ body {
 }
 
 .badge-album .album-year {
-    font-size:.7em;
+    font-size: .7em;
     font-weight: 100;
 }
 
 .badge-album .album-artist {
-    font-size:.9em;
+    font-size: .9em;
     font-weight: 100;
 }
 
@@ -217,9 +229,9 @@ body {
     height: 9vmax;
     outline: 1.5px solid black;
     border-radius: 100%;
-    margin:1vw;
+    margin: 1vw;
     display: inline-block;
-} 
+}
 
 
 .album-score span {
@@ -233,45 +245,55 @@ body {
     padding: 1.2em;
 }
 
-.album-item-wrapper{
+.album-item-wrapper {
     width: 100%;
-    height: 100%;
+    height: 90%;
+    margin-bottom: 10%;
 }
 
 .album-item {
     background-color: #222426;
-    color:#E5E6E4;
+    color: #E5E6E4;
     border-radius: 3%;
-    font-size: 1em;
+    font-size: min(1em, 1vmin);
     /* font-size: 1vw; */
     border: 1px solid #222426;
     width: 100%;
     /* margin: 1em; */
     padding: 0.5em;
     aspect-ratio: 1/1;
-    height:90%;
-    position:relative;
+    height: 100%;
+    padding-bottom: 3em;
+
+    position: relative;
 }
 
-.album-item .album-image{
+.album-item .artist-wrapper {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.album-item .album-image {
     aspect-ratio: 1/1;
     height: 50%;
 
     -o-object-fit: cover;
 
-       object-fit: cover;
+    object-fit: cover;
     margin: 1em;
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    position: absolute; top: -10%; 
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: absolute;
+    top: -10%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     background: url("/images/no_image.png");
-    background-size: contain;  
-  
+    background-size: contain;
 }
+
 .album-image-faded {
     background-color: #22242682;
     aspect-ratio: 1/1;
@@ -279,16 +301,17 @@ body {
     /* width: 51%; */
     margin: 1em;
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    position: absolute; top: -10%; 
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: absolute;
+    top: -10%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.album-image-spacer{
-    display:inline-block;
+.album-image-spacer {
+    display: inline-block;
     height: 60%;
 }
 
@@ -296,18 +319,19 @@ body {
     /* background-color: #22242665; */
     height: 50%;
     margin: 1em;
-    position: absolute; top: -10%; 
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
+    position: absolute;
+    top: -10%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 5em;
     text-shadow: 0px 4px 0px #222426, 0px -2px 0px #fff;
     /* line-height: 5em; */
 }
 
 .album-item .badge .badge-artist {
-    color:#E5E6E4;
+    color: #E5E6E4;
 }
 
 #album-item-container a {
@@ -318,7 +342,7 @@ body {
 
 .album-item .album-name {
     /* font-size: max(1.1em, 1.4vmax); */
-    font-size: calc(15px + 0.8vmax + (0.2vmin));
+    font-size: min(30px, calc(15px + 0.8vmax + (0.2vmin)));
     font-weight: 600;
     display: inline-block;
     /* font-size: 12px; */
@@ -327,10 +351,10 @@ body {
     height: calc(20px + 0.8vmax + (0.2vmin));
     overflow: visible;
     -o-text-overflow: ellipsis;
-       text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
-.album-item .artist-image-small{
+.album-item .artist-image-small {
     width: 2em;
     height: 2em;
 }
@@ -339,9 +363,13 @@ body {
     font-size: calc(15px + 0.1vmax + (0.1vmin));
 }
 
+.album-item .album-release {
+    font-size: calc(15px + 0.1vmax + (0.1vmin));
+}
+
 .album-item-long {
     background-color: #222426;
-    color:#E5E6E4;
+    color: #E5E6E4;
     padding: 2em;
     border-radius: 10px;
 }
@@ -351,7 +379,7 @@ body {
 }
 
 .album-item-long .album-image {
-    width:13em;
+    width: 13em;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -360,11 +388,11 @@ body {
 }
 
 .album-item-long table {
-    width: 100%;    
+    width: 100%;
     text-align: center;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 
@@ -376,77 +404,82 @@ body {
 
 .album-name .album-release {
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 .album-score-s-wrapper {
-    width: calc(15px + 3.5vmax);
-    height: calc(15px + 3.5vmax);
-    outline: .2vw solid #F2545B;
+    width: min(80px, calc(25px + 4vmin));
+    height: min(80px, calc(25px + 4vmin));
+    outline: max(3px, .4vmin) solid #F2545B;
     border-radius: 100%;
     float: right;
-    
-    margin:1vmax;
+
+    margin: 1vmin;
 }
+
 .album-score-s {
     font-weight: 700;
-    font-size: calc(11px + 0.6vmax);;
+    font-size: calc(15px + 0.6vmin);
     text-align: center;
-    line-height: calc(15px + 3.5vmax);
+    line-height: min(80px, calc(25px + 4vmin));
 }
 
 .dropdown {
-    font-size:1em;
+    font-size: 1em;
     font-weight: 500;
-    text-align:center;
+    text-align: center;
 }
+
 .dropdown label {
     font-weight: 800;
     -webkit-text-decoration: black 1px underline;
-            text-decoration: black 1px underline;
-    font-size:1.1em;
+    text-decoration: black 1px underline;
+    font-size: 1.1em;
 }
 
 .dropdown select {
     margin: 1em;
     padding: 0.5em;
     background-color: #E5E6E4;
-    border:none;
+    border: none;
     outline: #393C3F 2px solid;
     border-radius: 5px;
 }
 
 #list-item-container {
     background-color: #222426;
-    color:#E5E6E4;
+    color: #E5E6E4;
     margin: 0.5em;
     padding: 1em;
     border-radius: 1em;
     text-align: center;
 }
+
 #list-item-container a {
     text-decoration: inherit;
     color: inherit;
 }
+
 #list-item-container img {
     width: 5vmax;
     height: 5vmax;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: url("/images/no_image.png");
     background-size: contain;
 
 }
+
 #list-item-container table {
     width: 100%;
 }
 
 .link {
-    color:inherit;
+    color: inherit;
     -webkit-text-decoration-color: #F2545B;
-            text-decoration-color: #F2545B;
+    text-decoration-color: #F2545B;
     font-weight: 700;
 }

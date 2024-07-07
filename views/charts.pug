@@ -20,7 +20,7 @@ block main
             each alb in albums
                 if !alb.listenedTo
                     - continue
-                div.col-lg-4.col-12#album-item-container
+                div.col-lg-4.col-md-6.col-12#album-item-container
                     a(href=`/album/${alb.id}`)
                         div.album-item-wrapper
                             div.album-item
@@ -31,13 +31,14 @@ block main
                                 span.album-name #{alb.name}
                                 br
                                 br
-                                each artist in alb.artists
-                                    //- span.badge.badge-artist
-                                    a.artist-name(href=`/artist/${artist.id}`)
-                                        if artist.image != null
-                                            img.artist-image-small.me-2(src=`${artist.image}`)
-                                        | #{artist.name}
-                                    |&nbsp;&nbsp;&nbsp;
+                                div.artist-wrapper
+                                    each artist in alb.artists
+                                        //- span.badge.badge-artist
+                                        a.artist-name(href=`/artist/${artist.id}`)
+                                            if artist.image != null
+                                                img.artist-image-small.me-2(src=`${artist.image}`)
+                                            | #{artist.name}
+                                        |&nbsp;&nbsp;&nbsp;
                                 br
                                 br
                                 table(width="100%")
