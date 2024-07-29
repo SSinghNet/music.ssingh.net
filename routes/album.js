@@ -18,27 +18,39 @@ router.get("/", async (req, res) => {
     const count = await Album.count();
 
     let pageIn = req.query.page;
+    let getAll = req.query.all == "true" ? true : false;
 
-    try {
-        if (pageIn != null) {
-            if (typeof parseInt(pageIn) === "number" && (count / amount) > (pageIn)) {
-                page = parseInt(pageIn);
+    let albs = [];
+
+    if (!getAll) {
+        try {
+            if (pageIn != null) {
+                if (typeof parseInt(pageIn) === "number" && (count / amount) > (pageIn)) {
+                    page = parseInt(pageIn);
+                }
             }
+        } catch {
+            console.log("L");
         }
-    } catch {
-        console.log("L");
+
+        // page = req.query.page;
+
+        albs = await Album.findAll({
+            include: [Artist, Tag],
+            order: [
+                ['updatedAt', 'DESC'],
+            ],
+            limit: amount + 1,
+            offset: page != 0 ? amount * page + 1 : 0
+        });
+    } else {
+        albs = await Album.findAll({
+            include: [Artist, Tag],
+            order: [
+                ['updatedAt', 'DESC'],
+            ],
+        });
     }
-
-    // page = req.query.page;
-
-    let albs = await Album.findAll({
-        include: [Artist, Tag],
-        order: [
-            ['updatedAt', 'DESC'],
-        ],
-        limit: amount + 1,
-        offset: page != 0 ? amount * page + 1 : 0
-    });
 
     res.status(200).json(albs);
 });
