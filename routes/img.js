@@ -2,7 +2,7 @@ import express from "express";
 import AWS from "aws-sdk";
 import request from "request";
 import { restAuth } from "../middleware/restAuth.js";
-
+import memoryCache from "memory-cache";
 export let router = express.Router();
 
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
@@ -24,12 +24,19 @@ router.get("/", async (req, res) => {
         return;
     }
 
+    res.header('Cache-Control', 'max-age=120');
+    res.set('Content-type', "image/webp");
+
+    let cachedImage = memoryCache.get("img" + req.query.key);
+    if (cachedImage) {
+        return res.send(cachedImage);
+    }
+
     let s3File = await s3.getObject({
         Bucket: Bucket,
         Key: req.query.key,
     }).promise();
-
-    res.set('Content-type', "image/webp");
+    memoryCache.put("img" + req.query.key, s3File.Body, 5 * 60 * 1000);
     res.send(s3File.Body);
 });
 
