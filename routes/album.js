@@ -105,11 +105,11 @@ router.post("/", restAuth, async (req, res) => {
     if (req.body.artists != null) {
         req.body.artists.forEach(async (artist) => {
             if (artist["id"] == -1 || artist["id"] == null) {
-                Artist.findOne({ where: { name: artist["name"].trim() } }).then(async (result) => {
+                Artist.findOne({ where: { name: artist["name"] } }).then(async (result) => {
                     if (result != null) {
                         alb.addArtist(await Artist.findOne({ where: { id: result.id } }));
                     } else {
-                        let art = await Artist.create({ name: artist["name"].trim(), image: artist["image"] });
+                        let art = await Artist.create({ name: artist["name"], image: artist["image"] });
                         alb.addArtist(await Artist.findOne({ where: { id: await art.id } }));
                     }
                 });
@@ -122,11 +122,11 @@ router.post("/", restAuth, async (req, res) => {
     if (req.body.tags != null) {
         req.body.tags.forEach(async (tag) => {
             if (tag["id"] == -1 || tag["id"] == null) {
-                Tag.findOne({ where: { name: tag["name"].trim() } }).then(async (result) => {
+                Tag.findOne({ where: { name: tag["name"] } }).then(async (result) => {
                     if (result != null) {
                         alb.addTag(await Tag.findOne({ where: { id: result.id } }));
                     } else {
-                        let ta = await Tag.create({ name: tag["name"].trim() });
+                        let ta = await Tag.create({ name: tag["name"] });
                         alb.addTag(await Tag.findOne({ where: { id: await ta.id } }));
                     }
                 });
@@ -174,11 +174,11 @@ router.put("/:id", restAuth, async (req, res) => {
 
         req.body.artists.forEach(async (artist) => {
             if (artist["id"] == -1 || artist["id"] == null) {
-                Artist.findOne({ where: { name: artist["name"].trim() } }).then(async (result) => {
+                Artist.findOne({ where: { name: artist["name"] } }).then(async (result) => {
                     if (result != null) {
                         alb.addArtist(await Artist.findOne({ where: { id: result.id } }));
                     } else {
-                        let art = await Artist.create({ name: artist["name"].trim(), image: artist["image"] });
+                        let art = await Artist.create({ name: artist["name"], image: artist["image"] });
                         alb.addArtist(await Artist.findOne({ where: { id: await art.id } }));
                     }
                 });
@@ -196,11 +196,11 @@ router.put("/:id", restAuth, async (req, res) => {
         req.body.tags.forEach(async (tag) => {
             console.log(tag);
             if (tag["id"] == -1 || tag["id"] == null) {
-                Tag.findOne({ where: { name: tag["name"].trim() } }).then(async (result) => {
+                Tag.findOne({ where: { name: tag["name"] } }).then(async (result) => {
                     if (result != null) {
                         alb.addTag(await Tag.findOne({ where: { id: result.id } }));
                     } else {
-                        let ta = await Tag.create({ name: tag["name"].trim() });
+                        let ta = await Tag.create({ name: tag["name"] });
                         alb.addTag(await Tag.findOne({ where: { id: await ta.id } }));
                     }
                 });
