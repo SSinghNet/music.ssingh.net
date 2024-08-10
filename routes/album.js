@@ -104,6 +104,7 @@ router.post("/", restAuth, async (req, res) => {
 
     if (req.body.artists != null) {
         req.body.artists.forEach(async (artist) => {
+            console.log(artist["name"]);
             if (artist["id"] == -1 || artist["id"] == null) {
                 Artist.findOne({ where: { name: artist["name"] } }).then(async (result) => {
                     if (result != null) {
