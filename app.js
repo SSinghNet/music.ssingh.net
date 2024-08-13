@@ -1,3 +1,12 @@
+import * as fs from "fs";
+process.on('uncaughtException', (err, origin) => {
+    fs.writeSync(
+        process.stderr.fd,
+        `Caught exception: ${err}\n` +
+        `Exception origin: ${origin}\n`,
+    );
+});
+
 import express from "express";
 import bodyParser from "body-parser";
 import * as url from "url";
@@ -19,7 +28,7 @@ import * as lists from "./routes/lists.js";
 import * as year from "./routes/year.js";
 import * as img from "./routes/img.js";
 
-const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+export const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 discord.client.login(process.env.DISCORD_TOKEN);
 
@@ -53,7 +62,9 @@ app.use("/lists", lists.router);
 app.use("/year", year.router);
 
 app.all("*", (req, res) => {
+    res.status(500).render("500");
     res.status(404).render("404", { type: "Page" });
+
 });
 
 app.listen(7000);
