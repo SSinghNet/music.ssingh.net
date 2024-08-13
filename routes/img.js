@@ -3,6 +3,8 @@ import AWS from "aws-sdk";
 import request from "request";
 import { restAuth } from "../middleware/restAuth.js";
 import memoryCache from "memory-cache";
+import { __dirname } from "../app.js";
+
 export let router = express.Router();
 
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
@@ -32,12 +34,17 @@ router.get("/", async (req, res, next) => {
         return res.send(cachedImage);
     }
 
-    let s3File = await s3.getObject({
-        Bucket: Bucket,
-        Key: req.query.key,
-    }).promise();
-    memoryCache.put("img" + req.query.key, s3File.Body, 5 * 60 * 1000);
-    res.send(s3File.Body);
+    try {
+        let s3File = await s3.getObject({
+            Bucket: Bucket,
+            Key: req.query.key,
+        }).promise();
+        memoryCache.put("img" + req.query.key, s3File.Body, 5 * 60 * 1000);
+        res.send(s3File.Body);
+    } catch (error) {
+        res.set('Content-type', "image/png");
+        res.sendFile(__dirname + "/public/images/no_image.png");
+    }
 });
 
 router.post("/", restAuth, async (req, res, next) => {
