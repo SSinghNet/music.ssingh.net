@@ -4,7 +4,7 @@ import { Album, Artist, Tag } from "../models/models.js";
 
 export let router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     const query = req.query.query;
     let noResults = false;
     let results = null;
@@ -38,15 +38,15 @@ router.get("/", async (req, res) => {
     res.render("search", {title:"Search - ", noResults:noResults, results: results, query: req.query.query});
 });
 
-router.get("/album", async (req, res) => {
+router.get("/album", async (req, res, next) => {
     res.json(await Album.findAll({ where: { name: req.query.name } }));
     // return Album.findAll({ where: { name: req.query.name } });
 }); 
 
-router.get("/artist", async (req, res) => {
+router.get("/artist", async (req, res, next) => {
     res.json(await Artist.findAll({ where: { name: req.query.name } }));
 });
 
-router.get("/tag", async (req, res) => {
+router.get("/tag", async (req, res, next) => {
     res.json(await Tag.findAll({ where: { name: req.query.name } }));
 });

@@ -4,7 +4,7 @@ import { restAuth } from "../middleware/restAuth.js";
 
 export let router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     if (req.query.format != "json") {
         res.status(404).render("404");
         return;
@@ -52,7 +52,7 @@ router.get("/", async (req, res) => {
     res.status(200).json(tags);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
 
     let sortBy = "score";
     let sortOrder = "DESC";
@@ -102,7 +102,7 @@ router.get("/:id", async (req, res) => {
     res.status(200).render("tag", {tag: tag, albums: await albs});
 });
 
-router.post("/", restAuth, async (req, res) => {
+router.post("/", restAuth, async (req, res, next) => {
     let tag = Tag.build({
         name: req.body.name,
         color: req.body.color
@@ -112,7 +112,7 @@ router.post("/", restAuth, async (req, res) => {
     res.status(201).json(tag);
 });
 
-router.put("/:id", restAuth, async (req, res) => {
+router.put("/:id", restAuth, async (req, res, next) => {
     let tag = await Tag.findOne({ where: { id: req.params.id }});
     if (tag == null) {
         res.status(404).render("404", {type: "Tag"});
@@ -126,7 +126,7 @@ router.put("/:id", restAuth, async (req, res) => {
     res.status(200).json(tag);
 });
 
-router.delete("/:id", restAuth, async (req, res) => {
+router.delete("/:id", restAuth, async (req, res, next) => {
     let tag = await Tag.findOne({ where: { id: req.params.id }});
 
     if (tag == null) {

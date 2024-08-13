@@ -3,7 +3,7 @@ import { Album, Artist, Tag, sequelize } from "../models/models.js";
 
 export let router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     let albums;
     let pageTitle = "Top Albums of ";
 

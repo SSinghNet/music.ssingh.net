@@ -3,7 +3,7 @@ import { Album, Artist, Tag, sequelize } from "../models/models.js";
 
 export let router = express.Router();
 
-router.get("/:year", async (req, res) => { 
+router.get("/:year", async (req, res, next) => { 
     let year = req.params.year;
 
     if (isNaN(req.params.year) || (req.params.year).length != 4) {

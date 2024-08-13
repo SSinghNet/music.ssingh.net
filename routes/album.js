@@ -7,7 +7,7 @@ import * as discord from "../controllers/discord.js";
 
 export let router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     if (req.query.format != "json") {
         res.status(404).render("404");
         return;
@@ -59,7 +59,7 @@ router.get("/", async (req, res) => {
  * @param id 
  * @param format accepts json (defaults to default)
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
     let alb = await Album.findOne({ where: { id: req.params.id }, include: [Artist, Tag] });
 
     if (alb == null) {
@@ -91,7 +91,7 @@ router.get("/:id", async (req, res) => {
  * @param review album review (optional)
  * @param tags array of album tags (optional) [id, name] (tagid = -1 when newTag)
  */
-router.post("/", restAuth, async (req, res) => {
+router.post("/", restAuth, async (req, res, next) => {
     let alb = Album.build({
         name: req.body.name,
         image: req.body.image,
@@ -155,7 +155,7 @@ router.post("/", restAuth, async (req, res) => {
  * @param review album review (optional)
  * @param tags array of album tags (optional) [id, name] (tagid = -1 when newTag)
  */
-router.put("/:id", restAuth, async (req, res) => {
+router.put("/:id", restAuth, async (req, res, next) => {
     let alb = await Album.findOne({ where: { id: req.params.id }, include: [Artist, Tag] });
     if (alb == null) {
         res.status(404).render("404", { type: "Album" });
@@ -215,7 +215,7 @@ router.put("/:id", restAuth, async (req, res) => {
     res.status(200).json(alb);
 });
 
-router.delete("/:id", restAuth, async (req, res) => {
+router.delete("/:id", restAuth, async (req, res, next) => {
     let alb = await Album.findOne({ where: { id: req.params.id }, include: [Artist, Tag] });
 
     if (alb == null) {

@@ -3,7 +3,7 @@ import { Album, Artist, Tag } from "../models/models.js";
 
 export let router = express.Router();
 
-router.get("/", async (req, res) => { 
+router.get("/", async (req, res, next) => { 
     
     let albums = await Album.findAll({ include: [Artist, Tag]});
     let artists = await Artist.findAll({ include: Album });

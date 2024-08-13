@@ -3,11 +3,11 @@ import { Album, Artist, Tag } from "../models/models.js";
 
 export let router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     let page = 0;
     let amount = 21;
 
-    const count = await Album.count();
+    const count = await Album.count().catch((err) => next(err));
 
     let pageIn = req.query.page;
 

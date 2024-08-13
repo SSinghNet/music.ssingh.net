@@ -5,13 +5,13 @@ import { Sequelize } from "sequelize";
 
 export let router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     let lists = await List.findAll();
 
     res.render("lists", {title: "Lists - ", lists: lists});
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
     let list = await List.findOne({
         where: {
             id: req.params.id
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res) => {
     res.status(200).render("list", {title: `${list.name} - ` , list: list});
 });
 
-router.post("/", restAuth, async (req, res) => {
+router.post("/", restAuth, async (req, res, next) => {
     let list = List.build({
         name: req.body.name,
         description: req.body.description,
@@ -59,7 +59,7 @@ router.post("/", restAuth, async (req, res) => {
     res.status(201).json(list);
 });
 
-router.put("/:id", restAuth, async (req, res) => {
+router.put("/:id", restAuth, async (req, res, next) => {
     let list = await List.findOne({ where: { id: req.params.id }, include: [Album] });
     if (list == null) {
         res.status(404).render("404", {type: "List"});
@@ -87,7 +87,7 @@ router.put("/:id", restAuth, async (req, res) => {
     res.status(201).json(list);
 });
 
-router.delete("/:id", restAuth, async (req, res) => {
+router.delete("/:id", restAuth, async (req, res, next) => {
     let list = await List.findOne({ where: { id: req.params.id } });
 
     if (list == null) {

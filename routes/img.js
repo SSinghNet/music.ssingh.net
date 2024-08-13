@@ -18,7 +18,7 @@ const s3 = new AWS.S3({
     region
 });
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     if (req.query.key == null) {
         res.send("no key provided");
         return;
@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
     res.send(s3File.Body);
 });
 
-router.post("/", restAuth, async (req, res) => {
+router.post("/", restAuth, async (req, res, next) => {
     let url = encodeURI(req.body.url);
     let key = req.body.key;
 

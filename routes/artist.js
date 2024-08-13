@@ -5,7 +5,7 @@ import { Sequelize } from "sequelize";
 
 export let router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
     if (req.query.format != "json") {
         res.status(404).render("404");
         return;
@@ -53,7 +53,7 @@ router.get("/", async (req, res) => {
     res.status(200).json(arts);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
     let sortBy = "releaseDate";
     let sortOrder = "ASC";
 
@@ -115,7 +115,7 @@ router.get("/:id", async (req, res) => {
     res.status(200).render("artist", { artist: art, albums: albs2 });
 });
 
-router.post("/", restAuth, async (req, res) => {
+router.post("/", restAuth, async (req, res, next) => {
     let art = Artist.build({
         name: req.body.name,
         image: req.body.image
@@ -125,7 +125,7 @@ router.post("/", restAuth, async (req, res) => {
     res.status(201).json(art);
 });
 
-router.put("/:id", restAuth, async (req, res) => {
+router.put("/:id", restAuth, async (req, res, next) => {
     let art = await Artist.findOne({ where: { id: req.params.id } });
     if (art == null) {
         res.status(404).render("404", { type: "Artist" });
@@ -139,7 +139,7 @@ router.put("/:id", restAuth, async (req, res) => {
     res.status(200).json(art);
 });
 
-router.delete("/:id", restAuth, async (req, res) => {
+router.delete("/:id", restAuth, async (req, res, next) => {
     let art = await Artist.findOne({ where: { id: req.params.id } });
 
     if (art == null) {
