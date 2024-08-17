@@ -75,7 +75,7 @@ router.put("/:id", restAuth, async (req, res, next) => {
         return;
     }
     if (req.body.name != null) list.name = req.body.name;
-    if (req.body.description != null) list.description = req.body.releaseDate;
+    if (req.body.description != null) list.description = req.body.description;
     if (req.body.image != null) list.image = req.body.image;
 
     await list.save();
