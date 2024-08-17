@@ -78,9 +78,9 @@ router.put("/:id", restAuth, async (req, res, next) => {
     if (req.body.description != null) list.description = req.body.description;
     if (req.body.image != null) list.image = req.body.image;
 
-    list.albums = [];
     await list.save();
     if (req.body.albums != null) {
+        list.albums = [];
         (req.body.albums).forEach(async (album) => {
             if (album["id"] == -1 || album["id"] == null) {
                 Album.findOne({ where: { name: album["name"] } }).then(async (result) => {
