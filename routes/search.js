@@ -35,6 +35,10 @@ router.get("/", async (req, res, next) => {
         results.tags = await Tag.findAll({ where: { name: {[Sequelize.Op.like]: `%${req.query.query}%` } } });
         // console.log(results);
     }
+    if (req.query.format == "json") {
+        res.status(200).json(results);
+        return;
+    }
     res.render("search", {title:"Search - ", noResults:noResults, results: results, query: req.query.query});
 });
 
