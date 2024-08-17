@@ -8,6 +8,11 @@ export let router = express.Router();
 router.get("/", async (req, res, next) => {
     let lists = await List.findAll();
 
+    if (req.query.format == "json") {
+        res.status(200).json(lists);
+        return;
+    }
+
     res.render("lists", {title: "Lists - ", lists: lists});
 });
 
