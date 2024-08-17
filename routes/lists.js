@@ -78,6 +78,7 @@ router.put("/:id", restAuth, async (req, res, next) => {
     if (req.body.description != null) list.description = req.body.description;
     if (req.body.image != null) list.image = req.body.image;
 
+    list.albums = [];
     await list.save();
     if (req.body.albums != null) {
         (req.body.albums).forEach(async (album) => {
