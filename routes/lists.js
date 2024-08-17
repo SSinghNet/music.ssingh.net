@@ -44,6 +44,8 @@ router.post("/", restAuth, async (req, res, next) => {
         name: req.body.name,
         description: req.body.description,
         image: req.body.image,
+    }, {
+        include: [Album]
     });
 
     if (req.body.albums != null) {
