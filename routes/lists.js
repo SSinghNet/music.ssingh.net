@@ -80,7 +80,7 @@ router.put("/:id", restAuth, async (req, res, next) => {
 
     await list.save();
     if (req.body.albums != null) {
-        list.albums = null;
+        list.setAlbums([]);
         await list.save();
         (req.body.albums).forEach(async (album) => {
             if (album["id"] == -1 || album["id"] == null) {
