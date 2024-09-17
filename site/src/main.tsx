@@ -9,6 +9,7 @@ import ArtistSingle from "./pages/artist/ArtistSingle.tsx";
 import TagSingle from "./pages/tag/TagSingle.tsx";
 import Chart from "./pages/charts/Chart.tsx";
 import Search from "./pages/Search.tsx";
+// import Image from "./pages/Image.tsx";
 
 createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
@@ -24,6 +25,7 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/search" element={<Search />} />
                 <Route path="*" element={<Error />} />
             </Route>
+            {/* <Route path="/img" element={<Image />} /> */}
         </Routes>
     </BrowserRouter>
 )

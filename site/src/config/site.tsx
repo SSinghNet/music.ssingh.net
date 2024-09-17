@@ -1,4 +1,4 @@
-export const apiURL = "http://localhost:7002/";
+export const apiURL = "https://music-ssingh.onrender.com/";
 
 export interface Artist {
     id: number,
