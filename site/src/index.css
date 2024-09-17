@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: "Didact Gothic";
+    margin: 0px;
+    letter-spacing: 0.02em;
+}
+
+.grid-album {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.album-score {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
