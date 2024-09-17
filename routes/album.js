@@ -55,6 +55,11 @@ router.get("/", async (req, res, next) => {
     res.status(200).json(albs);
 });
 
+router.get("/count", async (req, res, next) => {
+    const count = await Album.count();
+    res.status(200).json({count: count, pages: Math.ceil(count/21)});
+});
+
 /**
  * @param id 
  * @param format accepts json (defaults to default)

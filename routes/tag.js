@@ -1,4 +1,4 @@
-import express from "express";
+import express, { json } from "express";
 import { Album, Artist, Tag } from "../models/models.js";
 import { restAuth } from "../middleware/restAuth.js";
 
@@ -80,11 +80,6 @@ router.get("/:id", async (req, res, next) => {
         return;
     } 
 
-    if (req.query.format == "json") {
-        res.status(200).json(tag);
-        return;
-    }
-
     let albs = await Album.findAll({
         where: { "$tags.id$": `${tag.id}` },
         include: [{
@@ -98,7 +93,13 @@ router.get("/:id", async (req, res, next) => {
     }).catch((err) => {
         return res.status(500).render("404", {type: err});
     });
-    
+
+    if (req.query.format == "json") {
+        let jsonTag = JSON.parse(JSON.stringify(tag));
+        res.status(200).json({...jsonTag, albums: albs});
+        return;
+    }
+
     res.status(200).render("tag", {tag: tag, albums: await albs});
 });
 

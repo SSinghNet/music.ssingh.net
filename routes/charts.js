@@ -7,8 +7,8 @@ router.get("/", async (req, res, next) => {
     let albums;
     let pageTitle = "Top Albums of ";
 
-    let page = 0
-    let amount = 21
+    let page = 0;
+    let amount = 21;
 
     let year = null;
 
@@ -71,6 +71,15 @@ router.get("/", async (req, res, next) => {
             offset: page != 0 ? amount * page + 1: 0
         });
         pageTitle += "All-Time"; 
+    }
+
+    if (req.query.format == "json") {
+        res.status(200).json({
+            count: count, 
+            pages: Math.ceil(count / 21),
+            albums: albums,
+        });
+        return;
     }
 
     res.render("charts", {"title": "Charts - ", "albums": albums, "pageTitle": pageTitle, page: page, maxPage: count / amount, offset: (amount * page), year: year});

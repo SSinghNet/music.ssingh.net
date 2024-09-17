@@ -80,11 +80,6 @@ router.get("/:id", async (req, res, next) => {
         return;
     }
 
-    if (req.query.format == "json") {
-        res.status(200).json(art);
-        return;
-    }
-
     let albs = await Album.findAll({
         where: { "$artists.id$": `${art.id}` },
         include: {
@@ -111,6 +106,12 @@ router.get("/:id", async (req, res, next) => {
 
     // let albs = await Album.findAll({ where: { "$Artists.id$": art.id }, include: [Artist] });
     // console.log(albs[0].artists)
+
+    if (req.query.format == "json") {
+        let jsonArt = JSON.parse(JSON.stringify(art));
+        res.status(200).json({...jsonArt, albums: albs2});
+        return;
+    }
 
     res.status(200).render("artist", { artist: art, albums: albs2 });
 });

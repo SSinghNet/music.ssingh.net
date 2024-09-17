@@ -61,10 +61,14 @@ app.use("/charts", charts.router);
 app.use("/lists", lists.router);
 app.use("/year", year.router);
 
+app.use("/status", (req, res) => {
+    res.status(200).send("Server Up.");
+})
+
 app.all("*", (req, res) => {
     res.status(500).render("500");
     res.status(404).render("404", { type: "Page" });
 
 });
 
-app.listen(7000);
+app.listen(7002);
