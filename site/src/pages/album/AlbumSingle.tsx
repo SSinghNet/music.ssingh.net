@@ -2,10 +2,11 @@ import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/loading";
 import { useEffect, useState } from "react";
 import { fetchSingleAlbum } from "../../middleware/album";
-import { Album } from "../../config/site";
+import { Album, Artist } from "../../config/site";
 import ArtistChipContainer from '../../components/artist/artistChipContainer';
 import TagChipContainer from "../../components/tag/tagChipContainer";
 import BackButton from '../../components/backButton';
+import Helmet from 'react-helmet';
 
 export default function AlbumSingle() {
     const [album, setAlbum] = useState<null | Album>(null);
@@ -19,9 +20,23 @@ export default function AlbumSingle() {
         initAlbum();
     });
 
+    const artists = album?.artists!.map((a : Artist) => {
+        return a.name;
+    }).join(", ");
+
+    const regex = /(<([^>]+)>)/gi;
+    const desc = album?.review!.replace(regex, "");
+
     if (album) {
         return (
             <>
+                <Helmet>
+                    <title>{album.name} - {artists} - SSingh.Net Music</title>
+                    <meta content={`${album.name} - ${artists}`} property="og:title" />
+                    <meta content={`${desc}`} property="og:description" />
+                    <meta content={`https://music.ssingh.net/album/${album.id}`} property="og:url" />
+                    <meta content={`${album.image}`} property="og:image" />
+                </Helmet>  
                 <BackButton />
                 <div className="flex flex-col flex-wrap md:mx-12 my-3 md:my-8 md:mt-0">
                     <div className="flex flex-row flex-wrap md:m-8 gap-10 justify-stretch">

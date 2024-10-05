@@ -5,6 +5,9 @@ import { restAuth } from "../middleware/restAuth.js";
 
 import * as discord from "../controllers/discord.js";
 
+import { __dirname } from "../app.js";
+import nodeHtmlToImage from 'node-html-to-image'
+
 export let router = express.Router();
 
 router.get("/", async (req, res, next) => {
@@ -142,12 +145,16 @@ router.post("/", restAuth, async (req, res, next) => {
         });
     }
 
-    await alb.save();
-
-    discord.sendMessage(`https://music.ssingh.net/album/${alb.id}`);
+    (await alb.save()).then(() => {
+        getAlbumCardImage(alb.id).then(()=> {
+            discord.sendMessage({
+                content: `https://music.ssingh.net/album/${alb.id}`, 
+                files: [__dirname + "/public/images/albumimage.png"]
+            });
+        });
+    });
 
     res.status(201).json(alb);
-
 });
 
 /**
@@ -231,3 +238,59 @@ router.delete("/:id", restAuth, async (req, res, next) => {
     alb.destroy();
     res.status(204).send();
 });
+
+const getAlbumCardImage = async (id) => {
+    let alb = await Album.findOne({ where: { id: id }, include: [Artist, Tag] });
+
+    if (alb == null) {
+        res.status(404).render("404", { type: "Album" });
+        return;
+    }
+
+    const chipHtml = (content, small) => {
+        let size = "font-size: 1rem; line-height: 1.5rem;";
+        if (small) {
+            size = "font-size: 0.75rem; line-height: 1rem;"
+        }
+
+        return `<div style='${size} display: flex; background-color:#181A1C; color:#e5e6e4; padding: 1.5px; border-radius:1.5rem; padding:.375rem; padding-left: .5rem; padding-right:.5rem; margin:.25rem; width:fit-content;' ><span style='margin:auto; margin-left:.5rem; margin-right:.5rem;text-wrap: nowrap;text-overflow: ellipsis;'>${content}</span></div>`;
+    }
+
+    const artHtml = alb.artists.map((art) => {
+        return chipHtml(art.name, false);
+    });
+
+    const tagHtml = alb.tags.map((tag) => {
+        return chipHtml(tag.name, true);
+    });
+
+    return nodeHtmlToImage({
+        output: "./public/images/albumimage.png",
+        html: "<html>" +
+                "<head>" + 
+                    "<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Didact%20Gothic'>" + 
+                    "<style> body {background-color: #393c3f; width:1100px; height: 500px; font-family: 'Didact Gothic', system-ui; font-weight: 400; font-style: normal; display:flex;  } </style>" +
+                "</head>" +
+                "<body>" +
+                    "<div style='padding:15px; display:flex; padding-bottom: 50px; width:100%;' ><div style='background-color:#e5e6e4; border-radius:1.5rem; min-height:400px; max-height:400px; overflow:hidden; margin:auto; display:flex;flex-direction:column; justify-content: space-evenly; padding:15px; width: 100%;'>" + 
+                        "<div style='display:flex;flex-direction:row;justify-content: space-between;'>" + 
+                            `<img src='${alb.image}' style='width:220px; height:220px; margin: auto;--tw-shadow: 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1); --tw-shadow-colored: 0 20px 25px -5px black, 0 8px 10px -6px black; box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow);'/>` +
+                            "<div style='display:flex;flex-direction:column; text-align:center; justify-content:center; margin: auto;'>" + 
+                                `<h1>${alb.name}</h1>` +
+                                `<div style='display:flex; margin:auto;'>${artHtml.join("")}</div>` +
+                                `<h4 style='font-weight:500;'>${alb.releaseDate}</h4>` +
+                                `<div style='display:flex; margin:auto;'>${tagHtml.join("")}</div>` +
+                            "</div>" +
+                            `<div style='margin:auto; border: 2px solid #F2545B; padding:1.5rem;  aspect-ratio:1/1; border-radius: 100%; height:4rem; width: 4rem;display:flex;'><h1 style='margin:auto; '>${alb.score}%</h1></div>` +
+                        "</div>" +
+                        "<hr style='border: 1px #00000025 solid; width:90%'>" +
+                        `<center style=""><p>${alb.review}</p></center>` +
+                    "</div></div>" +
+                    "<div style='position:absolute; background-color: #181A1C; color:#e5e6e4; font-size: 1rem; bottom:90; width:1100px; margin:0; padding: 10px; display:flex; flex-direction:row; justify-content: space-between;' >" +
+                        `<div style='font-size:1.25rem; color: #F2545B; margin-top:auto; margin-bottom:auto; display:flex;'><img src='https://music-ssingh.onrender.com/images/slogo.png' width='30'><span style='margin:auto; margin-left: 5px;'>Music</span></div>` +
+                        `<div style='margin-top:auto; margin-bottom:auto; margin-right: 30px;font-size: 0.8rem;'>https://music.ssingh.net/album/${alb.id}</div>` + 
+                    "</div>" +
+                "</body>" +
+            "</html>",
+    });   
+};

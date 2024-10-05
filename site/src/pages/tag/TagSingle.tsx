@@ -29,7 +29,7 @@ export default function TagSingle() {
     useEffect(() => {
         setTag(null);
         initTag();
-    }, [sortValue]);
+    }, [sortValue, tagID]);
 
     if (tag) {
         return (<>

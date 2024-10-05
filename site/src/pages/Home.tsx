@@ -4,6 +4,7 @@ import { Album } from '../config/site';
 import AlbumCard from "../components/album/albumCard";
 import Loading from "../components/loading";
 import PageButton from "../components/pageButton";
+import { Helmet } from "react-helmet";
 
 export default function Home() {
     const [albums, setAlbums] = useState<null | Album[]>(null);
@@ -43,6 +44,9 @@ export default function Home() {
 
         return (
             <>
+                <Helmet>
+                    <title>Home - SSingh.Net Music</title>
+                </Helmet>
                 <h1 className="text-4xl mt-8 text-center font-bold underline">Recently Reviewed Albums</h1><br />
                 {pageButtons}
                 <div className="grid-album">

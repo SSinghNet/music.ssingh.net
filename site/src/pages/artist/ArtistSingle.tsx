@@ -29,7 +29,7 @@ export default function ArtistSingle() {
     useEffect(() => {
         setArtist(null);
         initArtist();
-    }, [sortValue]);
+    }, [sortValue, artistID]);
 
     if (artist) {
         return (<>
