@@ -145,7 +145,7 @@ router.post("/", restAuth, async (req, res, next) => {
         });
     }
 
-    (await alb.save()).then(() => {
+    alb.save().then(() => {
         getAlbumCardImage(alb.id).then(()=> {
             discord.sendMessage({
                 content: `https://music.ssingh.net/album/${alb.id}`, 
