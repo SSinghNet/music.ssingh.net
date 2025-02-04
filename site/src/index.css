@@ -3,18 +3,36 @@
 @tailwind utilities;
 
 body {
-    font-family: "Didact Gothic";
-    margin: 0px;
-    letter-spacing: 0.02em;
+  font-family: "Didact Gothic";
+  margin: 0px;
+  letter-spacing: 0.02em;
 }
 
 .grid-album {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .album-score {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.album-image {
+  /* position: fixed; */
+  transform-origin: center;
+  -webkit-transform: translate3d(0, -13rem, 0);
+  -o-transform: translate3d(0, -13rem, 0);
+  transform: translate3d(0, -13rem, 0);
+}
+
+.album-image img {
+  display: flex;
+  margin: auto;
+}
+.album-image .rank {
+  display: flex;
+  margin: auto;
+  transform: translate(0, -200px);
 }

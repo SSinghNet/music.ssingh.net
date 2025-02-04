@@ -87,6 +87,17 @@ router.get("/:id", async (req, res, next) => {
     
     alb.review = sanitizeHtml(alb.review);
 
+    // getAlbumCardImage(alb.id).then(()=> {
+    //     discord.sendMessage({
+    //         content: `https://music.ssingh.net/album/${alb.id}`, 
+    //         files: [__dirname + "/public/images/albumimage.png"]
+    //     });
+    // });
+    
+    discord.sendMessage({
+        content: `https://music.ssingh.net/album/${alb.id}`
+    });
+
     res.status(200).render("album", { title: `${alb.name} - `, album: alb, descCleansed: desc });
 });
 

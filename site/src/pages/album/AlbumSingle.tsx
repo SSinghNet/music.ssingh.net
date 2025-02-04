@@ -17,10 +17,11 @@ export default function AlbumSingle() {
     };
 
     useEffect(() => {
+        setAlbum(null);
         initAlbum();
-    });
+    }, [albumID]);
 
-    const artists = album?.artists!.map((a : Artist) => {
+    const artists = album?.artists!.map((a: Artist) => {
         return a.name;
     }).join(", ");
 
@@ -36,7 +37,7 @@ export default function AlbumSingle() {
                     <meta content={`${desc}`} property="og:description" />
                     <meta content={`https://music.ssingh.net/album/${album.id}`} property="og:url" />
                     <meta content={`${album.image}`} property="og:image" />
-                </Helmet>  
+                </Helmet>
                 <BackButton />
                 <div className="flex flex-col flex-wrap md:mx-12 my-3 md:my-8 md:mt-0">
                     <div className="flex flex-row flex-wrap md:m-8 gap-10 justify-stretch">
@@ -54,8 +55,13 @@ export default function AlbumSingle() {
                             </h5>
                             <TagChipContainer tags={album.tags!} key={`${album.id}tagsingle`} />
                         </div>
-                        <div className="border-primary border-2 rounded-full p-8 aspect-square h-min m-auto">
+                        {/* <div className="border-primary border-2 rounded-full p-8 aspect-square h-min m-auto">
                             <h3 className="relative album-score text-4xl">{album.score}%</h3>
+                        </div> */}
+                        <div className="border-primary border-2 rounded-full p-8 aspect-square m-auto">
+                            <h6 className="text-4xl relative album-score">
+                                {album.score}%
+                            </h6>
                         </div>
                     </div>
                     <div className="flex flex-col flex-wrap mt-5">

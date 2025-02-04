@@ -5,6 +5,7 @@ import AlbumCard from "../components/album/albumCard";
 import Loading from "../components/loading";
 import PageButton from "../components/pageButton";
 import { Helmet } from "react-helmet";
+import AdCard from "../components/adsense/adCard";
 
 export default function Home() {
     const [albums, setAlbums] = useState<null | Album[]>(null);
@@ -38,7 +39,7 @@ export default function Home() {
                 {page < totalPages - 1 ?
                     <PageButton onClick={() => setPage(page + 1)} value={">"} />
                     : ""
-                }<br/>
+                }<br />
                 <h2 className="opacity-70 text-xs">pg {page + 1}</h2>
             </div>;
 
@@ -53,6 +54,7 @@ export default function Home() {
                     {albums.map((album: Album) => {
                         return <AlbumCard alb={album} />
                     })}
+                    <AdCard />
                 </div>
                 {pageButtons}
             </>
