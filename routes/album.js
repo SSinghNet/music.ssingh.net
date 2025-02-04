@@ -94,10 +94,6 @@ router.get("/:id", async (req, res, next) => {
     //     });
     // });
     
-    discord.sendMessage({
-        content: `https://music.ssingh.net/album/${alb.id}`
-    });
-
     res.status(200).render("album", { title: `${alb.name} - `, album: alb, descCleansed: desc });
 });
 
@@ -156,15 +152,19 @@ router.post("/", restAuth, async (req, res, next) => {
         });
     }
 
-    alb.save().then(() => {
-        getAlbumCardImage(alb.id).then(()=> {
-            discord.sendMessage({
-                content: `https://music.ssingh.net/album/${alb.id}`, 
-                files: [__dirname + "/public/images/albumimage.png"]
-            });
-        });
-    });
+    // alb.save().then(() => {
+    //     getAlbumCardImage(alb.id).then(()=> {
+    //         discord.sendMessage({
+    //             content: `https://music.ssingh.net/album/${alb.id}`, 
+    //             files: [__dirname + "/public/images/albumimage.png"]
+    //         });
+    //     });
+    // });
 
+    discord.sendMessage({
+        content: `${alb.name} | https://music.ssingh.net/album/${alb.id}`
+    });
+    
     res.status(201).json(alb);
 });
 
