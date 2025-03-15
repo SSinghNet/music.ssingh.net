@@ -161,8 +161,10 @@ router.post("/", restAuth, async (req, res, next) => {
     //     });
     // });
 
-    discord.sendMessage({
+    alb.save().then(() => {
+        discord.sendMessage({
         content: `${alb.name} | https://music.ssingh.net/album/${alb.id}`
+        })
     });
     
     res.status(201).json(alb);
