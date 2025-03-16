@@ -1,11 +1,11 @@
 import * as fs from "fs";
-process.on('uncaughtException', (err, origin) => {
-    fs.writeSync(
-        process.stderr.fd,
-        `Caught exception: ${err}\n` +
-        `Exception origin: ${origin}\n`,
-    );
-});
+// process.on('uncaughtException', (err, origin) => {
+//     fs.writeSync(
+//         process.stderr.fd,
+//         `Caught exception: ${err}\n` +
+//         `Exception origin: ${origin}\n`,
+//     );
+// });
 
 import express from "express";
 import bodyParser from "body-parser";
