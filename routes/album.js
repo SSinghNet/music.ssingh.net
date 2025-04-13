@@ -87,7 +87,7 @@ router.get("/:id", async (req, res, next) => {
     
     alb.review = sanitizeHtml(alb.review);
     
-    // discord.sendEmbed(alb);
+    discord.sendEmbed(alb); 
     
     res.status(200).render("album", { title: `${alb.name} - `, album: alb, descCleansed: desc });
 });
@@ -148,7 +148,7 @@ router.post("/", restAuth, async (req, res, next) => {
     }
 
     alb.save().then(() => {
-        alb.sendEmbed(alb);
+        discord.sendEmbed(alb);
     });
     
     res.status(201).json(alb);
