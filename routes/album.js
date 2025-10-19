@@ -147,9 +147,10 @@ router.post("/", restAuth, async (req, res, next) => {
         });
     }
 
-    alb.save().then(() => {
-        discord.sendEmbed(alb);
-    });
+    alb.save();
+    //     .then(() => {
+    //     discord.sendEmbed(alb);
+    // });
     
     res.status(201).json(alb);
 });
