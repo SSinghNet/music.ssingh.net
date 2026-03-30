@@ -12,10 +12,12 @@ export default function GenericChip(
             size?: "text-xs" | "text-sm" | "text-md" | "text-lg"
         }
 ) {
+    const displayText = text.length > 33 ? text.slice(0, 30) + "..." : text;
+
     return (
         <div style={{ "backgroundColor": `#${color}` }} className="flex bg-secondary rounded-full text-center p-1.5 px-2 m-1 w-fit shadow-sm">
             {image ? <img src={image} width={30} height={30}  className="aspect-square rounded-full ml-0 mx-1" /> : ""}
-            <h6 className={size + " mx-2 m-auto text-nowrap overflow-hidden text-ellipsis"}>{text}</h6>
+            <h6 className={size + " mx-2 m-auto text-nowrap overflow-hidden text-ellipsis"}>{displayText}</h6>
         </div>
     );
 }
