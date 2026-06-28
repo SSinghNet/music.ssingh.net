@@ -6,9 +6,10 @@ import { useState } from "react";
 export default function Navbar() {
     const navigate = useNavigate();
     const redirectToRandomAlbum = async () => {
-        getRandomAlbum().then((id) => {
+        try {
+            const id = await getRandomAlbum();
             navigate(`/album/${id}`);
-        });
+        } catch { }
     };
 
     const [searchParams,] = useSearchParams();

@@ -43,14 +43,14 @@ export default function ArtistSingle() {
                 <label htmlFor="sort">sort:</label>
                 <select name="sort" id="sort" className={"p-2 border-background border-2 rounded-lg m-2"} value={sortValue} onChange={(e) => { setSort(e.target.value) }}>
                     {sortOptions.map((sortOption: sortOption) => {
-                        return <option value={`${sortOption.sortBy}|${sortOption.sortOrder}`}>{sortOption.label}</option>;
+                        return <option key={sortOption.label} value={`${sortOption.sortBy}|${sortOption.sortOrder}`}>{sortOption.label}</option>;
                     })}
                 </select>
             </div>
 
             <div className="grid-album" key={`${artist.id}${sortValue}`}>
                 {artist.albums!.map((album: Album) => {
-                    return <AlbumCard alb={album} reload={true} />
+                    return <AlbumCard alb={album} reload={true} key={album.id} />
                 })}
             </div>
         </>

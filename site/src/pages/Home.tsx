@@ -52,7 +52,7 @@ export default function Home() {
                 {pageButtons}
                 <div className="grid-album">
                     {albums.map((album: Album) => {
-                        return <AlbumCard alb={album} />
+                        return <AlbumCard alb={album} key={album.id} />
                     })}
                     <AdCard />
                 </div>

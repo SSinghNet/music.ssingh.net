@@ -55,9 +55,6 @@ export default function AlbumSingle() {
                             </h5>
                             <TagChipContainer tags={album.tags!} key={`${album.id}tagsingle`} />
                         </div>
-                        {/* <div className="border-primary border-2 rounded-full p-8 aspect-square h-min m-auto">
-                            <h3 className="relative album-score text-4xl">{album.score}%</h3>
-                        </div> */}
                         <div className="border-primary border-2 rounded-full p-8 aspect-square m-auto">
                             <h6 className="text-4xl relative album-score">
                                 {album.score}%

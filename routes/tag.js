@@ -1,6 +1,7 @@
-import express, { json } from "express";
+import express from "express";
 import { Album, Artist, Tag } from "../models/models.js";
 import { restAuth } from "../middleware/restAuth.js";
+import { PAGE_SIZE, parsePage } from "../utils/pagination.js";
 
 export let router = express.Router();
 
@@ -9,36 +10,20 @@ router.get("/", async (req, res, next) => {
         res.status(404).render("404");
         return;
     }
-    let page = 0;
-    let amount = 21;
-
     const count = await Tag.count();
-
-    let pageIn = req.query.page;
-    let getAll = req.query.all == "true" ? true : false;
+    const getAll = req.query.all === "true";
+    const page = parsePage(req.query.page, count);
 
     let tags = [];
 
     if (!getAll) {
-        try {
-            if (pageIn != null) {
-                if (typeof parseInt(pageIn) === "number" && (count / amount) > (pageIn)) {
-                    page = parseInt(pageIn);
-                }
-            }
-        } catch {
-            console.log("L");
-        }
-
-        // page = req.query.page;
-
         tags = await Tag.findAll({
             include: [Album],
             order: [
                 ['updatedAt', 'DESC'],
             ],
-            limit: amount + 1,
-            offset: page != 0 ? amount * page + 1 : 0
+            limit: PAGE_SIZE + 1,
+            offset: page != 0 ? PAGE_SIZE * page : 0
         });
     } else {
         tags = await Tag.findAll({
@@ -88,15 +73,13 @@ router.get("/:id", async (req, res, next) => {
                 id: tag.id
             },
         }, Artist],
-        // include: [Artist],
         order: [[sortBy, sortOrder]]
     }).catch((err) => {
         return res.status(500).render("404", {type: err});
     });
 
     if (req.query.format == "json") {
-        let jsonTag = JSON.parse(JSON.stringify(tag));
-        res.status(200).json({...jsonTag, albums: albs});
+        res.status(200).json({...tag.toJSON(), albums: albs});
         return;
     }
 
@@ -123,7 +106,7 @@ router.put("/:id", restAuth, async (req, res, next) => {
     if (req.body.name != null) tag.name = req.body.name;
     if (req.body.color != null) tag.color = req.body.color;
 
-    tag.save();
+    await tag.save();
     res.status(200).json(tag);
 });
 

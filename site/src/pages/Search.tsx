@@ -21,7 +21,7 @@ export default function Search() {
         if (query) {
             initResults();
         }
-    });
+    }, [query]);
 
 
     const noResults = (<h3 className="text-center text-md">No Results</h3>);
@@ -37,16 +37,16 @@ export default function Search() {
                     <h2 className={"text-2xl underline text-center m-4"}>albums:</h2>
                     {results.albums.length > 0 ?
                         <div className="grid-album">
-                            {results.albums.splice(0, 5).map((album: Album) => {
-                                return <AlbumCard alb={album} />
+                            {results.albums.slice(0, 5).map((album: Album) => {
+                                return <AlbumCard alb={album} key={album.id} />
                             })}
                         </div> : noResults}
                     <h2 className={"text-2xl underline text-center m-4"}>artists:</h2>
                     {results.artists.length > 0 ?
-                        <ArtistChipContainer artists={results.artists.splice(0, 5)} /> : noResults}
+                        <ArtistChipContainer artists={results.artists.slice(0, 5)} /> : noResults}
                     <h2 className={"text-2xl underline text-center m-4"}>tags:</h2>
                     {results.tags.length > 0 ?
-                        <TagChipContainer tags={results.tags.splice(0, 5)} /> : noResults}
+                        <TagChipContainer tags={results.tags.slice(0, 5)} /> : noResults}
                 </>
             );
         }

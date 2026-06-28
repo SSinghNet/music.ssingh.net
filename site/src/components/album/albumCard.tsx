@@ -14,7 +14,7 @@ export default function AlbumCard({ alb, reload = false, rank }: { alb: Album, r
     };
 
     useEffect(() => {
-        if (album.artists == undefined || album.tags == undefined || { reload }) {
+        if (album.artists == undefined || album.tags == undefined || reload) {
             initAlbum();
         }
     }, []);

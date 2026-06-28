@@ -6,11 +6,6 @@ export default function Image() {
     const [searchParams,] = useSearchParams();
     const key = searchParams.get("key");
 
-    // return <Navigate to={{ pathname: `${apiURL}img`, search:createSearchParams({
-    //     key: `${key}`
-    // }).toString()
-    // }} replace />;
-
     useEffect(() => {
         window.location.href = `${apiURL}img?key=${key}`;
     }, []);

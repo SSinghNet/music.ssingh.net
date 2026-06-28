@@ -20,7 +20,6 @@ export default function Chart() {
         setTotalPages(res["pages"]);
     };
 
-    // setChart(null);
     useEffect(() => {
         setChart(null);
         initChart();

@@ -2,6 +2,7 @@ import express from "express";
 import { Album, Artist, Tag } from "../models/models.js";
 import { restAuth } from "../middleware/restAuth.js";
 import { Sequelize } from "sequelize";
+import { PAGE_SIZE, parsePage } from "../utils/pagination.js";
 
 export let router = express.Router();
 
@@ -10,36 +11,20 @@ router.get("/", async (req, res, next) => {
         res.status(404).render("404");
         return;
     }
-    let page = 0;
-    let amount = 21;
-
     const count = await Artist.count();
-
-    let pageIn = req.query.page;
-    let getAll = req.query.all == "true" ? true : false;
+    const getAll = req.query.all === "true";
+    const page = parsePage(req.query.page, count);
 
     let arts = [];
 
     if (!getAll) {
-        try {
-            if (pageIn != null) {
-                if (typeof parseInt(pageIn) === "number" && (count / amount) > (pageIn)) {
-                    page = parseInt(pageIn);
-                }
-            }
-        } catch {
-            console.log("L");
-        }
-
-        // page = req.query.page;
-
         arts = await Artist.findAll({
             include: [Album],
             order: [
                 ['updatedAt', 'DESC'],
             ],
-            limit: amount + 1,
-            offset: page != 0 ? amount * page + 1 : 0
+            limit: PAGE_SIZE + 1,
+            offset: page != 0 ? PAGE_SIZE * page : 0
         });
     } else {
         arts = await Artist.findAll({
@@ -100,16 +85,10 @@ router.get("/:id", async (req, res, next) => {
         return res.status(500).render("404", { type: err });
     });
 
-    // console.log(await albs[0]["dataValues"].artists[0]["dataValues"].albums);
-    // console.log(albs);
     let albs2 = albs[0]["dataValues"].artists[0]["dataValues"].albums;
 
-    // let albs = await Album.findAll({ where: { "$Artists.id$": art.id }, include: [Artist] });
-    // console.log(albs[0].artists)
-
     if (req.query.format == "json") {
-        let jsonArt = JSON.parse(JSON.stringify(art));
-        res.status(200).json({...jsonArt, albums: albs2});
+        res.status(200).json({...art.toJSON(), albums: albs2});
         return;
     }
 
@@ -136,7 +115,7 @@ router.put("/:id", restAuth, async (req, res, next) => {
     if (req.body.name != null) art.name = req.body.name;
     if (req.body.image != null) art.image = req.body.image;
 
-    art.save();
+    await art.save();
     res.status(200).json(art);
 });
 

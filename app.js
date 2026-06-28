@@ -1,12 +1,3 @@
-import * as fs from "fs";
-// process.on('uncaughtException', (err, origin) => {
-//     fs.writeSync(
-//         process.stderr.fd,
-//         `Caught exception: ${err}\n` +
-//         `Exception origin: ${origin}\n`,
-//     );
-// });
-
 import express from "express";
 import bodyParser from "body-parser";
 import * as url from "url";
@@ -66,9 +57,7 @@ app.use("/status", (req, res) => {
 })
 
 app.all("*", (req, res) => {
-    res.status(500).render("500");
     res.status(404).render("404", { type: "Page" });
-
 });
 
-app.listen(7002);
+app.listen(process.env.PORT || 7002);

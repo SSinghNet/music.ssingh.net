@@ -33,7 +33,6 @@ router.get("/", async (req, res, next) => {
 
         results.artists = await Artist.findAll({ where: { name: {[Sequelize.Op.like]: `%${req.query.query}%` } } });
         results.tags = await Tag.findAll({ where: { name: {[Sequelize.Op.like]: `%${req.query.query}%` } } });
-        // console.log(results);
     }
     if (req.query.format == "json") {
         res.status(200).json(results);
@@ -44,8 +43,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/album", async (req, res, next) => {
     res.json(await Album.findAll({ where: { name: req.query.name } }));
-    // return Album.findAll({ where: { name: req.query.name } });
-}); 
+});
 
 router.get("/artist", async (req, res, next) => {
     res.json(await Artist.findAll({ where: { name: req.query.name } }));

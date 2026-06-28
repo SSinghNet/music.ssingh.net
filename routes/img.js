@@ -1,6 +1,5 @@
 import express from "express";
 import AWS from "aws-sdk";
-import request from "request";
 import { restAuth } from "../middleware/restAuth.js";
 import memoryCache from "memory-cache";
 import { __dirname } from "../app.js";
@@ -48,35 +47,21 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", restAuth, async (req, res, next) => {
-    let url = encodeURI(req.body.url);
-    let key = req.body.key;
+    const url = encodeURI(req.body.url);
+    const key = req.body.key;
 
-    let options = {
-        method: 'GET',
-        url: url,
-        encoding: null
-    };
-    let body2 = "";
-    request(options, (error, response) => {
-        if (error) {
-            throw new Error(error)
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            res.status(502).send(`Failed to fetch image: ${response.status}`);
+            return;
         }
+        const body = Buffer.from(await response.arrayBuffer());
 
-        body2 = response.body;
-
-        const params = {
-            Bucket: process.env.BUCKET,
-            Key: key,
-            Body: body2,
-        };
-
-        s3.putObject(params, async (err, data) => {
-            if (err) {
-                console.log("Error: ", err);
-                res.send(err);
-            } else {
-                res.send("Success: " + key);
-            }
-        });
-    });
+        await s3.putObject({ Bucket: process.env.BUCKET, Key: key, Body: body }).promise();
+        res.send("Success: " + key);
+    } catch (err) {
+        console.error("Image upload error:", err);
+        res.status(500).send(err.message);
+    }
 });

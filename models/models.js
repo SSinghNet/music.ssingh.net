@@ -48,8 +48,8 @@ const Album = sequelize.define("album", {
         allowNull: true,
     },
     review: {
-        type: DataTypes.STRING,
-        allowNull:true
+        type: DataTypes.TEXT,
+        allowNull: true
     },
     listenedTo: {
         type: DataTypes.VIRTUAL,
@@ -97,7 +97,7 @@ const List = sequelize.define("list", {
         allowNull: false,
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
     },
     image: {
@@ -114,6 +114,6 @@ Artist.belongsToMany(Album, {through: "Album_Artists"});
 Tag.belongsToMany(Album, { through: "Album_Tags" });
 List.belongsToMany(Album, { through: "Album_Lists" });
 
-sequelize.sync();
+sequelize.sync({ alter: true });
 
 export {Album, Artist, Tag, List}

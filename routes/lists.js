@@ -52,17 +52,17 @@ router.post("/", restAuth, async (req, res, next) => {
 
     await myList.save();
     if (req.body.albums != null) {
-        (req.body.albums).forEach(async (album) => {
+        for (const album of req.body.albums) {
             if (album["id"] == -1 || album["id"] == null) {
-                Album.findOne({ where: { name: album["name"] } }).then(async (result) => {
-                    if (result != null) {
-                        myList.addAlbum(await Album.findOne({ where: { id: result.id } }));
-                    }
-                });
+                const result = await Album.findOne({ where: { name: album["name"] } });
+                if (result != null) {
+                    await myList.addAlbum(result);
+                }
             } else {
-                myList.addAlbum(await Album.findOne({ where: { id: album["id"] } }));
+                const found = await Album.findOne({ where: { id: album["id"] } });
+                await myList.addAlbum(found);
             }
-        });
+        }
     }
     await myList.save();
     res.status(201).json(myList);
@@ -80,23 +80,22 @@ router.put("/:id", restAuth, async (req, res, next) => {
 
     await list.save();
     if (req.body.albums != null) {
-        list.setAlbums([]);
-        await list.save();
-        (req.body.albums).forEach(async (album) => {
+        await list.setAlbums([]);
+        for (const album of req.body.albums) {
             if (album["id"] == -1 || album["id"] == null) {
-                Album.findOne({ where: { name: album["name"] } }).then(async (result) => {
-                    if (result != null) {
-                        list.addAlbum(await Album.findOne({ where: { id: result.id } }));
-                    }
-                });
+                const result = await Album.findOne({ where: { name: album["name"] } });
+                if (result != null) {
+                    await list.addAlbum(result);
+                }
             } else {
-                list.addAlbum(await Album.findOne({ where: { id: album["id"] } }));
+                const found = await Album.findOne({ where: { id: album["id"] } });
+                await list.addAlbum(found);
             }
-        });
+        }
     }
 
     await list.save();
-    res.status(201).json(list);
+    res.status(200).json(list);
 });
 
 router.delete("/:id", restAuth, async (req, res, next) => {

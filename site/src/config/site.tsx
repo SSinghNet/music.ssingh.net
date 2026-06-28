@@ -1,4 +1,4 @@
-export const apiURL = "https://music-ssingh.onrender.com/";
+export const apiURL = import.meta.env.VITE_API_URL ?? "https://music-ssingh.onrender.com/";
 
 export interface Artist {
     id: number,

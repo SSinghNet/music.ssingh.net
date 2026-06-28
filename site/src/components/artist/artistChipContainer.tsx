@@ -6,7 +6,7 @@ export default function ArtistChipContainer({ artists }: { artists: Artist[] }) 
         <div className="my-4 flex flex-row flex-wrap justify-center text-white">
             {artists?.map((artist) => {
                 return (
-                    <ArtistChip artist={artist} />
+                    <ArtistChip artist={artist} key={artist.id} />
                 );
             })}
         </div>

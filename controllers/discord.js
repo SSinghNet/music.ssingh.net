@@ -11,7 +11,8 @@ client.once(Events.ClientReady, readyClient => {
 
 export const sendMessage = (message) => {
     const channel = client.channels.cache.get(process.env.DISCORD_CHANNEL_ID);
-    channel.send(message); 
+    if (!channel) return;
+    channel.send(message);
 };
 
 export const sendEmbed = (album) => { 
@@ -33,5 +34,6 @@ export const sendEmbed = (album) => {
         .setDescription(album.review && sant(album.review).trim() ? truncate(sant(album.review), 500) : "ㅤㅤ")
         .setFooter({ text: `${album.score}%`});
     const channel = client.channels.cache.get(process.env.DISCORD_CHANNEL_ID);
+    if (!channel) return;
     channel.send({ embeds: [embed] });
 }

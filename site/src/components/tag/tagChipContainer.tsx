@@ -6,7 +6,7 @@ export default function TagChipContainer({ tags }: { tags: Tag[] }) {
         <div className="flex flex-row flex-wrap justify-center text-white">
             {tags?.map((tag) => {
                 return (
-                    <TagChip tag={tag} />
+                    <TagChip tag={tag} key={tag.id} />
                 );
             })}
         </div>

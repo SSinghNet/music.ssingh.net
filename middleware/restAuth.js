@@ -1,23 +1,26 @@
-import jwt from "jsonwebtoken";
+import { jwtVerify, SignJWT } from "jose";
 import "dotenv/config";
 
-export const restAuth = (req, res, next) => {
+const secret = () => new TextEncoder().encode(process.env.SECRET);
+
+export const restAuth = async (req, res, next) => {
     if (process.env.NODE_ENV == "production") {
-        console.log("auth");
-        let auth = false;
-        
-        jwt.verify(req.get("token"), process.env.SECRET, (err, user) => {
-            if (err || user.user != "root") {
+        try {
+            const { payload } = await jwtVerify(req.get("token"), secret());
+            if (payload.user != "root") {
                 return res.sendStatus(403);
             }
-            console.log(user);
             next();
-        });
+        } catch {
+            return res.sendStatus(403);
+        }
     } else {
         next();
     }
 };
 
-export const getAccessToken = (user) => {
-    return jwt.sign({ user: user }, process.env.SECRET);
-}
+export const getAccessToken = async (user) => {
+    return await new SignJWT({ user })
+        .setProtectedHeader({ alg: "HS256" })
+        .sign(secret());
+};
