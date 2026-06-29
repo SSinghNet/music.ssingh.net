@@ -60,4 +60,12 @@ app.all("*", (req, res) => {
     res.status(404).render("404", { type: "Page" });
 });
 
-app.listen(process.env.PORT || 7002);
+const server = app.listen(process.env.PORT || 7002);
+server.on("error", (err) => {
+    if (err.code === "EADDRINUSE") {
+        console.error(`Port ${err.port} is already in use. Exiting.`);
+        process.exit(1);
+    } else {
+        throw err;
+    }
+});

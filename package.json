@@ -5,6 +5,7 @@
     "main": "app.js",
     "scripts": {
         "dev": "nodemon app.js",
+        "dev:prod": "DOTENV_CONFIG_PATH=.env.prod nodemon app.js",
         "start": "node app.js"
     },
     "keywords": [],

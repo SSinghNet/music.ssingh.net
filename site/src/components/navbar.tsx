@@ -17,9 +17,9 @@ export default function Navbar() {
 
     const [searchState, toggleSearchState] = useState(false);
 
-    const search = <form className="flex search border-search border-2 focus-within:border-primary rounded-lg bg-search" action="/search">
-        <input type="text" name="query" id="search" className="w-[70vw] md:w-96 bg-search rounded-s-lg p-1 px-2 focus:outline-none" defaultValue={query!} />
-        <input type="submit" value="Search" className="bg-search p-1 px-2 text-sm rounded-e-lg" />
+    const search = <form className="flex search border-search border-2 focus-within:border-primary rounded-md bg-search" action="/search">
+        <input type="text" name="query" id="search" className="w-[70vw] md:w-96 bg-search rounded-s-md p-1 px-2 focus:outline-none" defaultValue={query!} />
+        <input type="submit" value="Search" className="bg-search p-1 px-2 text-sm rounded-e-md" />
     </form>;
 
     const toggleSearch = () => {
@@ -28,7 +28,7 @@ export default function Navbar() {
 
     return (
         <>
-            <div className="bg-secondary w-full p-2.5 fixed top-0 flex flex-row z-20 justify-between">
+            <div className="bg-secondary border-b-2 border-primary w-full p-2.5 fixed top-0 flex flex-row z-20 justify-between">
                 <div className="flex">
                     <img src={`${apiURL}images/slogo.png`} width={35} />
                     <Link to="/" onClick={() => localStorage.setItem("page", "0")}>
@@ -36,8 +36,10 @@ export default function Navbar() {
                     </Link>
                 </div>
                 <div className="ml-3 flex flex-row gap-5">
-                    <Link to={`/charts/${new Date().getFullYear()}`} className="my-auto text-white">charts</Link>
-                    <button className="my-auto text-white" onClick={redirectToRandomAlbum}>random</button>
+                    <Link to="/artist" className="my-auto text-white hover:text-primary transition-colors duration-200">artists</Link>
+                    <Link to="/tag" className="my-auto text-white hover:text-primary transition-colors duration-200">tags</Link>
+                    <Link to={`/charts/${new Date().getFullYear()}`} className="my-auto text-white hover:text-primary transition-colors duration-200">charts</Link>
+                    <button className="my-auto text-white hover:text-primary transition-colors duration-200" onClick={redirectToRandomAlbum}>random</button>
                     <div className="visible md:hidden my-auto">
                         <button className="my-auto text-white text-2xl" onClick={toggleSearch}>⌕</button>
                     </div>
@@ -47,7 +49,7 @@ export default function Navbar() {
                 </div>
             </div>
             {searchState ?
-                <div className="visible md:hidden bg-secondary w-full p-2.5 fixed top-12 flex flex-row z-10 justify-center">
+                <div className="visible md:hidden bg-secondary border-b-2 border-primary w-full p-2.5 fixed top-12 flex flex-row z-10 justify-center">
                     {search}
                 </div> : ""
             }

@@ -29,12 +29,12 @@ export default function Chart() {
 
     const header = (
         <>
-            <h1 className="text-4xl my-8 text-center font-bold underline">
+            <h1 className="text-4xl my-8 text-center font-bold text-white underline decoration-primary underline-offset-4">
                 Top Albums of <span className="capitalize">{year}</span>
             </h1>
             <div className="align-middle text-center ">
-                <label htmlFor="year">year:</label>
-                <select name="year" className="p-2 border-background border-2 rounded-lg m-2" defaultValue={year} onChange={(e) => { navigate(`/charts/${e.target.value as number | "all-time"}`); }}>
+                <label htmlFor="year" className="text-white/70">year:</label>
+                <select name="year" className="p-2 border border-white/20 rounded-lg m-2 bg-black text-white" defaultValue={year} onChange={(e) => { navigate(`/charts/${e.target.value as number | "all-time"}`); }}>
                     <option value="all-time">All-Time</option>
                     {
                         Array.from(
@@ -59,14 +59,14 @@ export default function Chart() {
                     <PageButton onClick={() => setPage(page + 1)} value={">"} />
                     : ""
                 }<br />
-                <h2 className="opacity-70 text-xs">pg {page + 1}</h2>
+                <h2 className="text-white opacity-70 text-xs">pg {page + 1}</h2>
             </div>;
 
         return (
             <div key={chartYear}>
                 {header}
                 {pageButtons}
-                {chart.length < 1 ? <h2 className="text-center m-6 text-xl">no albums for this year.</h2> :
+                {chart.length < 1 ? <h2 className="text-center m-6 text-xl text-white/70">no albums for this year.</h2> :
                     <div className="grid-album" key={chartYear}>
                         {chart.map((album: Album, index: number) => {
                             return <AlbumCard alb={album} key={`${album.id}-${chartYear}`} rank={page*21 + index + 1} />

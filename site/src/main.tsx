@@ -6,7 +6,9 @@ import Error from "./pages/Error.tsx";
 import AlbumSingle from "./pages/album/AlbumSingle.tsx";
 import Home from "./pages/Home.tsx";
 import ArtistSingle from "./pages/artist/ArtistSingle.tsx";
+import ArtistDirectory from "./pages/artist/ArtistDirectory.tsx";
 import TagSingle from "./pages/tag/TagSingle.tsx";
+import TagDirectory from "./pages/tag/TagDirectory.tsx";
 import Chart from "./pages/charts/Chart.tsx";
 import Search from "./pages/Search.tsx";
 // import Image from "./pages/Image.tsx";
@@ -18,9 +20,13 @@ createRoot(document.getElementById("root")!).render(
                 <Route index element={<Home />} />
                 <Route path="/album/:albumID" element={<AlbumSingle />} />
                 <Route path="artist" element={<Outlet />}>
+                    <Route index element={<ArtistDirectory />} />
                     <Route path=":artistID" element={<ArtistSingle />} />
                 </Route>
-                <Route path="/tag/:tagID" element={<TagSingle />} />
+                <Route path="tag" element={<Outlet />}>
+                    <Route index element={<TagDirectory />} />
+                    <Route path=":tagID" element={<TagSingle />} />
+                </Route>
                 <Route path="/charts/:chartYear" element={<Chart />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="*" element={<Error />} />

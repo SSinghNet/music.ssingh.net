@@ -35,13 +35,13 @@ export default function TagSingle() {
         return (<>
             <BackButton />
             <div className="flex flex-col flex-wrap justify-center align-middle gap-5 mb-5">
-                <h1 style={{ "textDecorationColor": `#${tag.color}`, textDecorationThickness: "3px" }} className="underline decoration-secondary m-auto text-2xl">{tag.name}</h1>
-                <Link to={tag.rym} target="_blank" className="text-center bg-background w-min p-2 text-white m-auto rounded-md text-sm">RYM</Link>
+                <h1 style={{ "textDecorationColor": `#${tag.color}`, textDecorationThickness: "3px" }} className="underline decoration-secondary m-auto text-2xl text-white">{tag.name}</h1>
+                <Link to={tag.rym} target="_blank" className="text-center bg-secondary w-min p-2 text-white m-auto rounded-md text-sm hover:bg-primary transition-colors duration-200">RYM</Link>
             </div>
 
             <div className="align-middle text-center">
-                <label htmlFor="sort">sort:</label>
-                <select name="sort" id="sort" className={"p-2 border-background border-2 rounded-lg m-2"} value={sortValue} onChange={(e) => { setSort(e.target.value) }}>
+                <label htmlFor="sort" className="text-white/70">sort:</label>
+                <select name="sort" id="sort" className="p-2 border border-white/20 rounded-lg m-2 bg-black text-white" value={sortValue} onChange={(e) => { setSort(e.target.value) }}>
                     {sortOptions.map((sortOption: sortOption) => {
                         return <option key={sortOption.label} value={`${sortOption.sortBy}|${sortOption.sortOrder}`}>{sortOption.label}</option>;
                     })}

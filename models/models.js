@@ -10,7 +10,19 @@ const getDb = () => {
             process.env.DB_USER,
             process.env.DB_PASS, {
             host: process.env.DB_HOST,
-            dialect: "mysql"
+            dialect: "mysql",
+            dialectOptions: {
+                connectTimeout: 60000,
+                keepAlive: true,
+                keepAliveInitialDelay: 0,
+            },
+            pool: {
+                max: 3,
+                min: 0,
+                acquire: 30000,
+                idle: 10000,
+                evict: 1000,
+            }
         });
     } else {
         return new Sequelize({
@@ -114,6 +126,8 @@ Artist.belongsToMany(Album, {through: "Album_Artists"});
 Tag.belongsToMany(Album, { through: "Album_Tags" });
 List.belongsToMany(Album, { through: "Album_Lists" });
 
-sequelize.sync({ alter: true });
+if (process.env.NODE_ENV !== "production") {
+    sequelize.sync({ alter: { drop: false } });
+}
 
 export {Album, Artist, Tag, List}

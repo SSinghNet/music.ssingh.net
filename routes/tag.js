@@ -14,27 +14,35 @@ router.get("/", async (req, res, next) => {
     const getAll = req.query.all === "true";
     const page = parsePage(req.query.page, count);
 
+    const validSortBy = ["name", "updatedAt"];
+    const validSortOrder = ["ASC", "DESC"];
+    let sortBy = "updatedAt";
+    let sortOrder = "DESC";
+    if (validSortBy.includes(req.query.sortBy)) sortBy = req.query.sortBy;
+    if (validSortOrder.includes(req.query.sortOrder)) sortOrder = req.query.sortOrder;
+
     let tags = [];
 
     if (!getAll) {
         tags = await Tag.findAll({
             include: [Album],
-            order: [
-                ['updatedAt', 'DESC'],
-            ],
+            order: [[sortBy, sortOrder]],
             limit: PAGE_SIZE + 1,
             offset: page != 0 ? PAGE_SIZE * page : 0
         });
     } else {
         tags = await Tag.findAll({
             include: [Album],
-            order: [
-                ['updatedAt', 'DESC'],
-            ],
+            order: [[sortBy, sortOrder]],
         });
     }
 
     res.status(200).json(tags);
+});
+
+router.get("/count", async (req, res, next) => {
+    const count = await Tag.count();
+    res.status(200).json({ count: count, pages: Math.ceil(count / PAGE_SIZE) });
 });
 
 router.get("/:id", async (req, res, next) => {

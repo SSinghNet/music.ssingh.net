@@ -20,23 +20,26 @@ router.get("/", async (req, res, next) => {
     const getAll = req.query.all === "true";
     const page = parsePage(req.query.page, count);
 
+    const validSortBy = ["name", "score", "releaseDate", "updatedAt"];
+    const validSortOrder = ["ASC", "DESC"];
+    let sortBy = "updatedAt";
+    let sortOrder = "DESC";
+    if (validSortBy.includes(req.query.sortBy)) sortBy = req.query.sortBy;
+    if (validSortOrder.includes(req.query.sortOrder)) sortOrder = req.query.sortOrder;
+
     let albs = [];
 
     if (!getAll) {
         albs = await Album.findAll({
             include: [Artist, Tag],
-            order: [
-                ['updatedAt', 'DESC'],
-            ],
+            order: [[sortBy, sortOrder]],
             limit: PAGE_SIZE + 1,
             offset: page != 0 ? PAGE_SIZE * page : 0
         });
     } else {
         albs = await Album.findAll({
             include: [Artist, Tag],
-            order: [
-                ['updatedAt', 'DESC'],
-            ],
+            order: [[sortBy, sortOrder]],
         });
     }
 

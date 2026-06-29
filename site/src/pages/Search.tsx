@@ -24,27 +24,27 @@ export default function Search() {
     }, [query]);
 
 
-    const noResults = (<h3 className="text-center text-md">No Results</h3>);
+    const noResults = (<h3 className="text-center text-md text-white/50">No Results</h3>);
 
     if (query) {
         if (results) {
 
             return (
                 <>
-                    <h1 className="text-4xl mt-8 text-center font-bold underline">
+                    <h1 className="text-4xl mt-8 text-center font-bold text-white underline decoration-primary underline-offset-4">
                         Search Results for: <span className="font-normal no-underline decoration-0">{query}</span>
                     </h1><br />
-                    <h2 className={"text-2xl underline text-center m-4"}>albums:</h2>
+                    <h2 className="text-2xl underline text-center m-4 text-white">albums:</h2>
                     {results.albums.length > 0 ?
                         <div className="grid-album">
                             {results.albums.slice(0, 5).map((album: Album) => {
                                 return <AlbumCard alb={album} key={album.id} />
                             })}
                         </div> : noResults}
-                    <h2 className={"text-2xl underline text-center m-4"}>artists:</h2>
+                    <h2 className="text-2xl underline text-center m-4 text-white">artists:</h2>
                     {results.artists.length > 0 ?
                         <ArtistChipContainer artists={results.artists.slice(0, 5)} /> : noResults}
-                    <h2 className={"text-2xl underline text-center m-4"}>tags:</h2>
+                    <h2 className="text-2xl underline text-center m-4 text-white">tags:</h2>
                     {results.tags.length > 0 ?
                         <TagChipContainer tags={results.tags.slice(0, 5)} /> : noResults}
                 </>

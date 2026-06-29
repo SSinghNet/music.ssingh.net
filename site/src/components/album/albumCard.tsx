@@ -20,35 +20,32 @@ export default function AlbumCard({ alb, reload = false, rank }: { alb: Album, r
     }, []);
 
     return (
-        <div className="bg-black m-2 text-white rounded-xl shadow-background shadow-md drop-shadow-md text-center p-2 mt-20 pt-36 flex flex-col flex-wrap justify-between">
-            <Link to={`/album/${album.id}`} >
-                <div className="w-full aspect-square bg-transparent album-image h-0">
+        <div className="group bg-black text-white rounded-lg overflow-hidden transition-all duration-200 hover:brightness-110 m-2 flex flex-col border-t-4 border-primary">
+            <Link to={`/album/${album.id}`}>
+                <div className="relative">
                     <img
                         src={album.image}
-                        width={200}
-                        className="align-middle aspect-square shadow-background shadow-lg drop-shadow-md w-[200px]"
+                        className="w-full aspect-square object-cover transition-transform duration-300 ease-out group-hover:scale-105"
                     />
-                    {rank != null ?
-                        <div className="w-[200px] aspect-square bg-black bg-opacity-50 flex justify-center align-middle items-center text-8xl rank">
+                    <div className="absolute bottom-2 right-2 bg-primary rounded-full w-12 h-12 flex items-center justify-center shadow-md ring-2 ring-black">
+                        <span className="text-xs font-bold text-white leading-none">{album.score}%</span>
+                    </div>
+                    {rank != null ? (
+                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-8xl font-bold">
                             {rank}
                         </div>
-                        : ""}
+                    ) : null}
                 </div>
-                <h1 className="text-2xl my-3 mx-1 overflow-ellipsis">
+                <h1 className="text-lg font-semibold p-3 pb-1 line-clamp-2 text-left">
                     {album.name}
                 </h1>
             </Link>
-            <ArtistChipContainer artists={album.artists!} key={`${album.id}-artist`} />
-            <TagChipContainer tags={album.tags!} key={`${album.id}-tag`} />
-            <div className="flex flew-row justify-between m-3">
-                <h6 className="text-sm my-auto">
-                    {album.releaseDate}
-                </h6>
-                <div className="border-primary border-2 rounded-full p-1.5 aspect-square">
-                    <h6 className="text-sm relative album-score">
-                        {album.score}%
-                    </h6>
-                </div>
+            <div className="px-2">
+                <ArtistChipContainer artists={album.artists!} key={`${album.id}-artist`} />
+                <TagChipContainer tags={album.tags!} key={`${album.id}-tag`} />
+            </div>
+            <div className="px-3 py-2 mt-auto">
+                <span className="text-xs opacity-50">{album.releaseDate}</span>
             </div>
         </div>
     );

@@ -4,10 +4,10 @@ import Navbar from "./components/navbar";
 
 export default function App() {
     return (
-        <div className="bg-background h-full w-full">
+        <div className="bg-secondary min-h-screen w-full">
             <Navbar />
-            <div id="main" className="pt-20 pb-20 h-full">
-                <div id="container" className="bg-white m-auto w-[90vw] rounded-3xl p-5 drop-shadow-md h-full">
+            <div id="main" className="pt-20 pb-20">
+                <div id="container" className="px-4 md:px-6">
                     <Outlet />
                 </div>
             </div>

@@ -1,8 +1,8 @@
-import { Album, apiURL } from "../config/site";
+import { Album, apiURL, SortBy, SortOrder } from "../config/site";
 
-export const fetchAlbums = async ({ page=undefined }: { page?: number }) => {
+export const fetchAlbums = async ({ page, sortBy = "releaseDate", sortOrder = "DESC" }: { page?: number, sortBy?: SortBy, sortOrder?: SortOrder }) => {
     const pageParam = page === undefined ? "all=true" : `page=${page}`;
-    const res = await fetch(`${apiURL}album/?format=json&${pageParam}`);
+    const res = await fetch(`${apiURL}album/?format=json&${pageParam}&sortBy=${sortBy}&sortOrder=${sortOrder}`);
     return await res.json() as Album[];
 };
 

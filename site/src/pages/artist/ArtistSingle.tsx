@@ -35,13 +35,13 @@ export default function ArtistSingle() {
         return (<>
             <BackButton />
             <div className="flex flex-col flex-wrap justify-center align-middle gap-5 mb-5">
-                <img src={artist.image} width={200} className="m-auto shadow-md shadow-background" />
-                <h1 className="m-auto text-2xl">{artist.name}</h1>
+                <img src={artist.image} width={200} className="m-auto" />
+                <h1 className="m-auto text-2xl text-white">{artist.name}</h1>
             </div>
 
             <div className="align-middle text-center">
-                <label htmlFor="sort">sort:</label>
-                <select name="sort" id="sort" className={"p-2 border-background border-2 rounded-lg m-2"} value={sortValue} onChange={(e) => { setSort(e.target.value) }}>
+                <label htmlFor="sort" className="text-white/70">sort:</label>
+                <select name="sort" id="sort" className="p-2 border border-white/20 rounded-lg m-2 bg-black text-white" value={sortValue} onChange={(e) => { setSort(e.target.value) }}>
                     {sortOptions.map((sortOption: sortOption) => {
                         return <option key={sortOption.label} value={`${sortOption.sortBy}|${sortOption.sortOrder}`}>{sortOption.label}</option>;
                     })}
